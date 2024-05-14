@@ -11,10 +11,7 @@
         <div class="login-card">
             <h1>Create Employee Account</h1>
             <form id="createEmployeeForm" enctype="multipart/form-data">
-                <!-- Campo de upload de foto com pré-visualização -->
-                <input type="file" name="photo" accept="image/*" required onchange="previewFile()">
-                <img id="photo-preview" src="" alt="Image preview" style="max-width: 100%; height: auto; margin-top: 10px; display: none;">
-
+                <input type="file" name="photo" accept="image/*" required>
                 <input type="text" placeholder="First Name" required>
                 <input type="text" placeholder="Last Name" required>
                 <input type="text" placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="CPF should be in the format 000.000.000-00" required>
@@ -34,24 +31,6 @@
         </div>
     </div>
     <script>
-        function previewFile() {
-            var preview = document.getElementById('photo-preview');
-            var file = document.querySelector('input[type="file"]').files[0];
-            var reader = new FileReader();
-            
-            reader.onloadend = function () {
-                preview.src = reader.result;
-                preview.style.display = 'block';
-            };
-
-            if (file) {
-                reader.readAsDataURL(file);
-            } else {
-                preview.src = "";
-                preview.style.display = 'none';
-            }
-        }
-
         document.getElementById('createEmployeeForm').onsubmit = function(event) {
             event.preventDefault();
             const password = document.querySelector('input[type="password"]').value;
@@ -60,9 +39,11 @@
                 alert('Passwords do not match!');
                 return;
             }
-            // Aqui adicionaria o código para tratar o envio dos dados para o servidor
+            // Send data to server here
+            // Example: alert('Form is valid. Submitting data...')
             alert('Account created successfully!');
-            window.location.href = 'index.html';
+            // Implementar o envio de email de confirmação aqui
+            window.location.href = 'index.html'; // Redirects back to the login
         }
     </script>
 </body>
