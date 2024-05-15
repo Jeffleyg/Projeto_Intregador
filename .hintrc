@@ -6,7 +6,8 @@
     "axe/forms": [
       "default",
       {
-        "label": "off"
+        "label": "off",
+        "select-name": "off"
       }
     ],
     "compat-api/css": [
@@ -17,6 +18,8 @@
           "-webkit-line-break"
         ]
       }
-    ]
+    ],
+    "meta-viewport": "off",
+    "no-inline-styles": "off"
   }
 }
