@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="style_login.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,600,0,0" />
     <title>Login Page</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -63,6 +66,7 @@
                     </svg>
                 </a>
             </div>
+            
         </div>
     </div>
     <script>
@@ -72,11 +76,35 @@
             var password = document.getElementById('passwordForm').value;
             // Verificação simples de login hard-coded
             if (email === "jeffley@gmail.com" && password === "1234") {
-                window.location.href = 'map.html'; // Redireciona para a página do mapa
+                window.location.href = 'dashboard.html'; // Redireciona para a página do mapa
             } else {
                 alert('Invalid username or password!');
             }
         }
+    </script>
+    <script>
+        function startApp() {
+            gapi.load('auth2', function() {
+                auth2 = gapi.auth2.init({
+                    client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+                    cookiepolicy: 'single_host_origin',
+                });
+                attachSignin(document.getElementById('customBtn'));
+            });
+        }
+
+        function attachSignin(element) {
+            console.log(element.id);
+            auth2.attachClickHandler(element, {},
+                function(googleUser) {
+                    document.getElementById('name').innerText = "Signed in: " +
+                        googleUser.getBasicProfile().getName();
+                }, function(error) {
+                    alert(JSON.stringify(error, undefined, 2));
+                });
+        }
+
+        startApp();
     </script>
 
 </body>
