@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil do Usuário - Histórico de Compras de Viagem</title>
+    <link rel="stylesheet" href="profile.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Perfil do Usuário</h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="ajuda.html">Ajuda</a></li>
+                    <li><a href="settings.html">Configurações</a></li>
+                    <li><a href="profile.html" class="active">Perfil</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="profile-info">
+            <h2>Informações Pessoais</h2>
+            <div class="info">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" value="Maria Silva">
+            </div>
+            <div class="info">
+                <label for="email">Email:</label>
+                <input type="email" id="email" value="maria.silva@example.com">
+            </div>
+            <div class="info">
+                <label for="phone">Telefone:</label>
+                <input type="tel" id="phone" value="(11) 99876-5432">
+            </div>
+        </section>
+        <section class="account-settings">
+            <h2>Configurações de Conta</h2>
+            <div class="settings">
+                <label for="password">Alterar Senha:</label>
+                <input type="password" id="password">
+            </div>
+            <div class="settings">
+                <label for="notifications">Notificações:</label>
+                <input type="checkbox" id="notifications" checked> Ativar
+            </div>
+            <button type="button" onclick="updateProfile()">Atualizar Perfil</button>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 FelisShop. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

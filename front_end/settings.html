@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Configurações - Histórico de Compras de Viagem</title>
+    <link rel="stylesheet" href="settings.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Configurações</h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="ajuda.html">Ajuda</a></li>
+                    <li><a href="settings.html" class="active">Configurações</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section>
+            <h2>Preferências de Conta</h2>
+            <div class="settings-option">
+                <label for="language">Idioma:</label>
+                <select id="language">
+                    <option value="pt">Português</option>
+                    <option value="en">Inglês</option>
+                </select>
+            </div>
+            <div class="settings-option">
+                <label for="timezone">Fuso Horário:</label>
+                <select id="timezone">
+                    <option value="UTC-3">Brasília (UTC-3)</option>
+                    <option value="UTC">Londres (UTC)</option>
+                </select>
+            </div>
+        </section>
+        <section>
+            <h2>Configurações de Segurança</h2>
+            <div class="settings-option">
+                <label for="password">Alterar Senha:</label>
+                <input type="password" id="password" placeholder="Nova Senha">
+            </div>
+            <div class="settings-option">
+                <label for="twofa">Autenticação de Dois Fatores:</label>
+                <input type="checkbox" id="twofa"> Ativar
+            </div>
+            <button type="button" onclick="saveSettings()">Salvar Alterações</button>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 FelisShop. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
