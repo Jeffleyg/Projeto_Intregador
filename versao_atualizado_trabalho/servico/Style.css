@@ -1,0 +1,213 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #4E342E; /* Cor marrom de fundo */
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav {
+    display: flex;
+}
+
+.menu-items {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+.menu-items li {
+    padding: 0 15px;
+}
+
+.menu-items li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.menu-items li a:hover {
+    text-decoration: underline;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .menu-items {
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #333;
+        flex-direction: column;
+    }
+
+    .menu-items.active {
+        display: flex;
+    }
+}
+
+#menu-toggle:checked + .menu-icon + .menu-items {
+    display: flex;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #BDBDBD; /* Cor cinza clara */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center; /* Centraliza os itens horizontalmente */
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #555;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-group label,
+.form-group input {
+    width: 48%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cancel-button {
+    background-color: #D32F2F; /* Cor vermelha */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 48%;
+}
+
+.cancel-button:hover {
+    background-color: #B71C1C;
+}
+
+.save-button {
+    background-color: #388E3C; /* Cor verde */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 48%;
+}
+
+.save-button:hover {
+    background-color: #2E7D32;
+}
+
+.opcoes {
+    margin-top: 20px;
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.opcoes h3 {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.opcoes input[type="checkbox"],
+.opcoes input[type="radio"] {
+    margin-right: 5px;
+}
+
+.opcoes input[type="text"] {
+    margin-left: 20px;
+    display: inline;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+    }
+
+    form {
+        padding: 0 10px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    textarea,
+    select {
+        width: 100%;
+    }
+}

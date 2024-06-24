@@ -1,6 +1,6 @@
+import Home from "./routes/Home";
 import Login from "./routes/Login";
 import Perfil from "./routes/Perfil";
-import Home from "./routes/Home";
 
 export default function App() {
 

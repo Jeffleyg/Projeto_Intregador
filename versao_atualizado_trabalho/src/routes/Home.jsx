@@ -1,4 +1,8 @@
 import React from 'react';
+
+
+
+
 import './dashboard.css';
 
 function Home() {
@@ -14,7 +18,7 @@ function Home() {
               <ul className="menu-items">
                 <li><a href="create_account.html">Cadastrar Funcionário</a></li>
                 <li><a href="login.html">Login</a></li>
-                <li><a href="cadastrar_viagem.html">Cadastrar Viagem</a></li>
+                <li><a href="cadastrar_viagem.jsx">Cadastrar Viagem</a></li>
                 <li><a href="cadastrar_de_despesas.html">Cadastrar Despesas da Viagem</a></li>
                 <li><a href="registro_compras.html">Registrar Compras da Viagem</a></li>
                 <li><a href="manter_cadastro_produtos.html">Manter Cadastro de Produtos</a></li>
