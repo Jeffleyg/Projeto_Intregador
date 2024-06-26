@@ -1,0 +1,69 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .login-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-card {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .login-card-logo img {
+    height: 50px;
+  }
+  
+  .login-card-header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .login-card-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-item {
+    margin-bottom: 15px;
+  }
+  
+  .form-item-icon {
+    margin-right: 10px;
+  }
+  
+  .form-item input {
+    width: calc(100% - 40px);
+    padding: 10px;
+  }
+  
+  .form-item-other {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .login-card-footer {
+    margin-top: 20px;
+  }
+  
+  .login-card-social {
+    margin-top: 20px;
+  }
+  
+  .login-card-social-btns a {
+    margin: 0 10px;
+  }
+  
