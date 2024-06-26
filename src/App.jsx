@@ -13,6 +13,8 @@ import HistoricoDespesas from './routes/HistoricoDespesas';
 import HistoricoViagens from './routes/HistoricoViagens';
 import ManterCadastroCompras from './routes/ManterCadastroCompras';
 import CadastraViagem from './routes/CadastraViagem';
+import BuscaViagem from './routes/BuscaViagem';
+import ForgotPassword from './routes/ForgotPassword';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path="/historicoViagens" element={<HistoricoViagens />} />
         <Route path="/manterCadastro" element={<ManterCadastroCompras />} />
         <Route path="/cadastrarViagem" element={<CadastraViagem />} />
+        <Route path="/buscaViagem" element={<BuscaViagem />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );

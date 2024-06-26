@@ -29,7 +29,7 @@ function Home() {
                 <li><Link to="/HistoricoViagens"> Histórico das Viagens</Link></li>
                 <li><Link to="/HistoricoDespesas"> Histórico das Despesas de uma Viagem</Link></li>
                 <li><Link to="/HistoricoCompras"> Histórico de Compras de uma Viagem</Link></li>
-                <li><Link to="/buscarViagem">Buscar Viagem</Link></li>
+                <li><Link to="/buscaViagem">Buscar Viagem</Link></li>
               </ul>
             </li>
             <li><Link to="/login">Login</Link></li>
@@ -66,9 +66,6 @@ function Home() {
           </select>
         </div>
       </main>
-      <footer>
-        <p>© 2024 FelisShop. Todos os direitos reservados.</p>
-      </footer>
     </>
   );
 }

@@ -44,7 +44,7 @@ function Login({ onLoginSuccess }) {
               <input type="checkbox" id="rememberMeCheckbox" defaultChecked />
               <label htmlFor="rememberMeCheckbox">Remember me</label>
             </div>
-            <a href="forgot_password.html">I forgot my password!</a>
+            <a href="/forgotPassword">I forgot my password!</a>
           </div>
           <button type="submit">Sign In</button>
         </form>
