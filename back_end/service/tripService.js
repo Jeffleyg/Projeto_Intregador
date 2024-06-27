@@ -1,4 +1,5 @@
-const Cadastro = require('../models/cadastrarViagem');
+/* eslint-disable no-undef */
+const Cadastro = require('../models/cadastrarViagemModel');
 const transporter = require('../utils/mailer');
 
 const registerViagem = async (data) => {

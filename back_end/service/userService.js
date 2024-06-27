@@ -1,4 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 const Cadastro = require('../models/cadastrarModel');
+const CadastroAdmin = require('../models/cadastrarAdmin');
+const transporter = require('../utils/mailer');
+
 
 const register = async (data) => {
     const { password, confirmPassword } = data;
@@ -6,7 +11,18 @@ const register = async (data) => {
         throw new Error('Senhas não coincidem');
     }
 
+    const mailOptions = {
+        from: 'jeffley.garcon@estudante.uffs.edu.br',
+        to: email,
+        subject: 'Cadastro realizado com sucesso',
+        text: 'Cadastro realizado com sucesso'
+    };
+
     return Cadastro.create(data);
+};
+
+const registerAdmin = async (data) => {
+    return CadastroAdmin.create(data);
 };
 
 const listAll = async () => {
@@ -29,13 +45,23 @@ const search = async (firstName) => {
     return Cadastro.find({ firstName });
 };
 
-const login = async ({ email, password }) => {
+const loginUsuario = async ({ email, password }) => {
     const user = await Cadastro.findOne({ email, password });
     if (!user) {
         throw new Error('Usuário não encontrado');
     }
     return user;
 };
+
+const loginAdmin = async ({ email, password }) => {
+    const user = await CadastroAdmin.findOne({ email, password });
+    if (!user) {
+        throw new Error('Usuário não encontrado');
+    }
+    return user;
+};
+
+
 
 const forgotPassword = async (email) => {
     const user = await Cadastro.findOne({ email });
@@ -73,17 +99,27 @@ const changePassword = async ({ email, oldPassword, newPassword, confirmPassword
         throw new Error('Usuário não encontrado');
     }
     user.password = newPassword;
+    if (user){
+        const mailOptions = {
+            from: 'jeffley.garcon@estudante.uffs.edu.br',
+            to: email,
+            subject: 'Alteração de senha',
+            text: 'Alteração de senha'
+        };
+    }
     await user.save();
 };
 
 module.exports = {
     register,
+    registerAdmin,
     listAll,
     getById,
     update,
     remove,
     search,
-    login,
+    loginUsuario,
+    loginAdmin,
     forgotPassword,
     resetPassword,
     changePassword

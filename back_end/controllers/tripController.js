@@ -1,4 +1,6 @@
-const tripService = require('../services/tripService');
+/* eslint-disable no-undef */
+const tripService = require('../service/tripService');
+const tripModel = require('../models/cadastrarViagemModel');
 
 const registerViagem = async (req, res, next) => {
     try {
@@ -45,10 +47,41 @@ const deleteViagem = async (req, res, next) => {
     }
 };
 
+const searchViagem = async (req, res, next) => {
+    try {
+        const trip = await tripService.search(req.query);
+        res.status(200).json({ trip });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const listViagensByUser = async (req, res, next) => {
+    try {
+        const trips = await tripService.listByUser(req.params.id);
+        res.status(200).json({ trips });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const listViagensByDate = async (req, res, next) => {
+    try {
+        const trips = await tripService.listByDate(req.query);
+        res.status(200).json({ trips });
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 module.exports = {
     registerViagem,
     listViagens,
     getViagemById,
     updateViagem,
-    deleteViagem
+    deleteViagem,
+    searchViagem,
+    listViagensByUser,
+    listViagensByDate
 };
