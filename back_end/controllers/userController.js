@@ -1,4 +1,9 @@
-const Cadastro = require('../models/cadastrarModel');
+/* eslint-disable no-undef */
+const userModel = require('../models/cadastrarModel'); // Atualizado o nome da variável para evitar conflito
+const admModel = require('../models/cadastrarAdmin');
+const userServices = require('../service/userService');
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = 'Jeffley2024';
 
 const registerUsuario = async (req, res, next) => {
     try {
@@ -7,8 +12,19 @@ const registerUsuario = async (req, res, next) => {
             return res.status(400).json({ error: 'Senhas não coincidem' });
         }
 
-        const cadastro = await Cadastro.create(req.body);
-        res.status(201).json({ cadastro });
+        const user = await userServices.register(req.body);
+        res.status(201).json({ user });
+    } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error);
+        next(error);
+    }
+};
+
+const registerAdmin = async (req, res, next) => {
+    try {
+        const { firstName, lastName, email, password } = req.body;
+        const user = await userServices.registerAdmin(req.body);
+        res.status(201).json({ user });
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error);
         next(error);
@@ -17,8 +33,8 @@ const registerUsuario = async (req, res, next) => {
 
 const listUsuarios = async (req, res, next) => {
     try {
-        const cadastros = await Cadastro.find();
-        res.status(200).json({ cadastros });
+        const users = await userServices.listAll();
+        res.status(200).json({ users });
     } catch (error) {
         console.error('Erro ao listar usuários:', error);
         next(error);
@@ -27,8 +43,8 @@ const listUsuarios = async (req, res, next) => {
 
 const getUsuarioById = async (req, res, next) => {
     try {
-        const cadastro = await Cadastro.findById(req.params.id);
-        res.status(200).json({ cadastro });
+        const user = await userServices.getById(req.params.id);
+        res.status(200).json({ user });
     } catch (error) {
         console.error('Erro ao listar usuário por ID:', error);
         next(error);
@@ -37,8 +53,8 @@ const getUsuarioById = async (req, res, next) => {
 
 const updateUsuario = async (req, res, next) => {
     try {
-        const cadastro = await Cadastro.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.status(200).json({ cadastro });
+        const user = await userServices.update(req.params.id, req.body);
+        res.status(200).json({ user });
     } catch (error) {
         console.error('Erro ao atualizar usuário:', error);
         next(error);
@@ -47,7 +63,7 @@ const updateUsuario = async (req, res, next) => {
 
 const deleteUsuario = async (req, res, next) => {
     try {
-        await Cadastro.findByIdAndDelete(req.params.id);
+        await userServices.remove(req.params.id);
         res.status(200).json({ message: 'Deletado com sucesso' });
     } catch (error) {
         console.error('Erro ao deletar usuário:', error);
@@ -58,39 +74,52 @@ const deleteUsuario = async (req, res, next) => {
 const searchUsuario = async (req, res, next) => {
     try {
         const { firstName } = req.query;
-        const cadastros = await Cadastro.find({ firstName });
-        res.status(200).json({ cadastros });
+        const users = await userServices.search(firstName);
+        res.status(200).json({ users });
     } catch (error) {
         console.error('Erro ao buscar usuário:', error);
         next(error);
     }
 };
 
-const login = async (req, res, next) => {
+const loginUsuario = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        const cadastro = await Cadastro.findOne({ email, password });
-        if (cadastro) {
-            res.status(200).json({ cadastro });
-        } else {
-            res.status(400).json({ error: 'Usuário não encontrado' });
-        }
+        const user = await userServices.loginUsuario({ email, password });
+        if (user) {
+            const token = jwt.sign({ email, role: 'usuario' }, SECRET_KEY, { expiresIn: 3600 });
+            res.status(200).json({ auth: true, message: "login realizado com sucesso",token});
+          } else {
+            res.status(401).json({ erro: 'Credenciais inválidas' });
+          }
     } catch (error) {
         console.error('Erro ao logar usuário:', error);
         next(error);
     }
 };
 
+const loginAdmin = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+        const user = await userServices.loginAdmin({ email, password });
+        if (user) {
+            const token = jwt.sign({ email, role: 'admin' }, SECRET_KEY, { expiresIn: 3600 });
+            res.status(200).json({ auth: true, message: "login realizado com sucesso",token});
+          } else {
+            res.status(401).json({ erro: 'Credenciais inválidas' });
+          }
+    } catch (error) {
+        console.error('Erro ao logar usuário:', error);
+        next(error);
+    }
+};
+
+
 const forgotPassword = async (req, res, next) => {
     try {
         const { email } = req.body;
-        const cadastro = await Cadastro.findOne({ email });
-        if (cadastro) {
-            // Lógica para enviar email de recuperação de senha
-            res.status(200).json({ message: 'Email enviado para recuperação de senha' });
-        } else {
-            res.status(400).json({ error: 'Email não cadastrado' });
-        }
+        const message = await userServices.forgotPassword(email);
+        res.status(200).json({ message });
     } catch (error) {
         console.error('Erro ao recuperar senha:', error);
         next(error);
@@ -104,12 +133,8 @@ const resetPassword = async (req, res, next) => {
             return res.status(400).json({ error: 'Senhas não coincidem' });
         }
 
-        const cadastro = await Cadastro.findOneAndUpdate({ email }, { password });
-        if (cadastro) {
-            res.status(200).json({ message: 'Senha alterada com sucesso' });
-        } else {
-            res.status(400).json({ error: 'Email não cadastrado' });
-        }
+        const message = await userServices.resetPassword({ email, password });
+        res.status(200).json({ message });
     } catch (error) {
         console.error('Erro ao resetar senha:', error);
         next(error);
@@ -123,14 +148,8 @@ const changePassword = async (req, res, next) => {
             return res.status(400).json({ error: 'Senhas não coincidem' });
         }
 
-        const cadastro = await Cadastro.findOne({ email, password: oldPassword });
-        if (cadastro) {
-            cadastro.password = newPassword;
-            await cadastro.save();
-            res.status(200).json({ message: 'Senha alterada com sucesso' });
-        } else {
-            res.status(400).json({ error: 'Usuário não encontrado' });
-        }
+        const message = await userServices.changePassword({ email, oldPassword, newPassword });
+        res.status(200).json({ message });
     } catch (error) {
         console.error('Erro ao alterar senha:', error);
         next(error);
@@ -139,12 +158,14 @@ const changePassword = async (req, res, next) => {
 
 module.exports = {
     registerUsuario,
+    registerAdmin,
     listUsuarios,
     getUsuarioById,
     updateUsuario,
     deleteUsuario,
     searchUsuario,
-    login,
+    loginUsuario,
+    loginAdmin,
     forgotPassword,
     resetPassword,
     changePassword
