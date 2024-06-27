@@ -28,8 +28,21 @@ const CadastrarViagem = sequelize.define('CadastrarViagem', {
     allowNull: false
   }
 }, {
-  tableName: 'viagens',
-  timestamps: false
+  tableName: 'CadastrarViagem',
+  timestamps: false,
+  hooks: {
+    beforeCreate: (user) => {
+        // Aqui você pode gerar um employeeId único automaticamente
+        user.idFuncionario = generateEmployeeId(); // função para gerar o employeeId
+    }
+}
 });
 
+// Função para gerar um employeeId único
+function generateEmployeeId() {
+// Lógica para gerar o employeeId, por exemplo, um UUID, ou baseado em timestamp, etc.
+return 'EMP-' + Math.random().toString(36).substr(2, 9); // Exemplo simples
+}
+
+ 
 module.exports = CadastrarViagem;

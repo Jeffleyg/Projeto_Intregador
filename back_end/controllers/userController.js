@@ -4,14 +4,12 @@ const admModel = require('../models/cadastrarAdmin');
 const userServices = require('../service/userService');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'Jeffley2024';
+const transporter = require('../utils/mailer');
+const { dataDeIda } = require('../models/cadastrarModel');
 
 const registerUsuario = async (req, res, next) => {
     try {
-        const { firstName, lastName, cpf, email, dateOfBirth, zipCode, address, phoneNumber, password, confirmPassword, employeeId } = req.body;
-        if (password !== confirmPassword) {
-            return res.status(400).json({ error: 'Senhas não coincidem' });
-        }
-
+        const { firstName, lastName, cpf, email, dateOfBirth, zipCode, address, phoneNumber, password, confirmPassword } = req.body;   
         const user = await userServices.register(req.body);
         res.status(201).json({ user });
     } catch (error) {
