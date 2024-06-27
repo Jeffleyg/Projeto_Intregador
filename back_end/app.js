@@ -20,12 +20,6 @@ const corsOptions = {
 sequelize.sync()
   .then(async () => {
     console.log('Tabelas do banco de dados foram sincronizadas com sucesso.');
-    const cadastroAdmin = await CadastroAdmin.create({
-    firstName: 'Jeff',
-    lastName: 'User',
-    email: 'jeffleygarcon@gmail.com',
-    password: 'admin'
-});
     })
 
         .catch((error) => {

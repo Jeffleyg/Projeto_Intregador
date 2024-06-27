@@ -1,72 +1,64 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  .account-card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .account-card {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
-  
-  .account-card h1 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .account-card form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .account-card input[type="text"],
-  .account-card input[type="email"],
-  .account-card input[type="date"],
-  .account-card input[type="password"],
-  .account-card input[type="file"] {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .account-card button[type="submit"] {
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .account-card button[type="submit"]:hover {
-    background-color: #555;
-  }
-  
-  .account-card-footer {
-    margin-top: 15px;
-  }
-  
-  .account-card-footer a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .account-card-footer a:hover {
-    text-decoration: underline;
-  }
-  
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 20px;
+}
+
+.login-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.login-card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-card-header h1 {
+  color: #333;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-card input,
+.login-card button {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.login-card button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-card button:hover {
+  background-color: #555;
+}
+
+.login-card-footer {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.login-card-footer a {
+  color: #333;
+  text-decoration: none;
+}
+
+.login-card-footer a:hover {
+  text-decoration: underline;
+}

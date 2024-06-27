@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../dashboard.css';
@@ -16,7 +17,6 @@ function Home() {
             <li>
               <Link to="#">Cadastros</Link>
               <ul>
-                <li><Link to="/cadastrarFuncionario">Cadastrar Funcionário</Link></li>
                 <li><Link to="/cadastrarViagem">Cadastrar Viagem</Link></li>
                 <li><Link to="/cadastrarDespesas">Cadastrar Despesas da Viagem</Link></li>
                 <li><Link to="/registroCompras">Registrar Compras da Viagem</Link></li>

@@ -7,18 +7,31 @@ const transporter = require('../utils/mailer');
 
 const register = async (data) => {
     const { password, confirmPassword } = data;
+    const existingUser = await findByCPFOrEmail(data.cpf, data.email);
     if (password !== confirmPassword) {
         throw new Error('Senhas não coincidem');
     }
 
-    const mailOptions = {
-        from: 'jeffley.garcon@estudante.uffs.edu.br',
-        to: email,
-        subject: 'Cadastro realizado com sucesso',
-        text: 'Cadastro realizado com sucesso'
-    };
+    const employeeId = generateEmployeeId();
 
-    return Cadastro.create(data);
+    const userDataWithEmployeeId = { ...data, employeeId };
+
+    return Cadastro.create(userDataWithEmployeeId);
+};
+
+const generateEmployeeId = () => {
+    return Math.random().toString(36).substring(2, 10); // Gera um ID aleatório para exemplo
+};
+
+const findByCPFOrEmail = async (cpf, email) => {
+    const userByCPF = await Cadastro.findOne({ cpf });
+    const userByEmail = await Cadastro.findOne({ email });
+
+    if (userByCPF || userByEmail) {
+        return true; // Retorna true se encontrar usuário com CPF ou email
+    }
+
+    return false; // Retorna false se não encontrar nenhum usuário
 };
 
 const registerAdmin = async (data) => {
@@ -122,5 +135,6 @@ module.exports = {
     loginAdmin,
     forgotPassword,
     resetPassword,
-    changePassword
+    changePassword,
+    findByCPFOrEmail
 };
