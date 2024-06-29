@@ -16,6 +16,21 @@ const register = async (data) => {
 
     const userDataWithEmployeeId = { ...data, employeeId };
 
+    const mailOptions = {
+        from: 'jeffleygarcon007@gmail.com',
+        to: data.email,
+        subject: 'Cadastro de Usuário',
+        text: ` olá, ${data.firstName} ${data.lastName} \n Seu cadastro foi realizado com sucesso! \n Seu ID de funcionário é: ${employeeId}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Erro ao enviar email:', error);
+        } else {
+            console.log('Email enviado:', info.response);
+        }
+    });
+
     return Cadastro.create(userDataWithEmployeeId);
 };
 
@@ -101,6 +116,7 @@ const resetPassword = async ({ email, password, confirmPassword }) => {
     if (!user) {
         throw new Error('Email não cadastrado');
     }
+    
 };
 
 const changePassword = async ({ email, oldPassword, newPassword, confirmPassword }) => {
