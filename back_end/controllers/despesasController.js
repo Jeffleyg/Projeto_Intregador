@@ -53,10 +53,25 @@ const registerDespesa = async (req, res) => {
         const mailOptions = {
             from: 'jeffleygarcon007@gmail.com',
             to: req.user.email, // Substituir pelo email do destinatário
-            subject: 'Lembrete de despesa',
-            text: 'Lembrete de despesa'
+            subject: 'Lembrete de Despesa',
+            text: `
+            Olá,
+        
+            Este é um lembrete sobre a seguinte despesa que está prestes a vencer:
+        
+            - **Descrição da Despesa:** ${req.body.descricao}
+            - **Data de Vencimento:** ${req.body.dataDeVencimento}
+            - **Valor:** R$${req.body.valor}
+        
+            Por favor, certifique-se de que esta despesa seja registrada e paga a tempo para evitar possíveis problemas.
+        
+            Se você tiver alguma dúvida ou precisar de mais informações, entre em contato conosco.
+        
+            Atenciosamente,
+            [Sua Empresa/Seu Nome]
+            `
         };
-
+        
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error('Erro ao enviar email:', error);

@@ -19,7 +19,24 @@ const registerViagem = async (data) => {
         from: 'jeffley.garcon@estudante.uffs.edu.br',
         to: email,
         subject: 'Lembrete de viagem',
-        text: 'Lembrete de viagem'
+        text: `
+Olá,
+
+Este é um lembrete sobre a seguinte viagem que está prestes a acontecer:
+
+- **Cidade:** ${cidade}
+- **Data de Ida:** ${dataDeIda}
+- **Data de Volta:** ${dataDeVolta}
+- **Objetivo:** ${objetivo}
+- **Descrição:** ${descricao}
+
+Por favor, certifique-se de que todos os preparativos estejam em ordem e que você esteja pronto para a viagem.
+
+Se você tiver alguma dúvida ou precisar de mais informações, entre em contato conosco.
+
+Atenciosamente,
+[Sua Empresa/Seu Nome]
+        `
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -32,6 +49,7 @@ const registerViagem = async (data) => {
 
     return Cadastro.create(data);
 };
+
 
 const listAllViagem = async () => {
     return Cadastro.findAll();
@@ -52,10 +70,25 @@ const updateViagem = async (id, data) => {
     dataLembrete.setDate(dataLembrete.getDate() - 1);
 
     const mailOptions = {
-        from: 'jeffley.garcon@estudante.uffs.edu.br',
-        to: email,
-        subject: 'Lembrete de viagem',
-        text: 'Lembrete de viagem'
+        from: 'jeffleygarcon007@gmail.com',
+        to: req.user.email, // Substituir pelo email do destinatário
+        subject: 'Lembrete de Despesa',
+        text: `
+        Olá,
+    
+        Este é um lembrete sobre a seguinte despesa que está prestes a vencer:
+    
+        - **Descrição da Despesa:** ${req.body.descricao}
+        - **Data de Vencimento:** ${req.body.dataDeVencimento}
+        - **Valor:** R$${req.body.valor}
+    
+        Por favor, certifique-se de que esta despesa seja registrada e paga a tempo para evitar possíveis problemas.
+    
+        Se você tiver alguma dúvida ou precisar de mais informações, entre em contato conosco.
+    
+        Atenciosamente,
+        [Sua Empresa/Seu Nome]
+        `
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
