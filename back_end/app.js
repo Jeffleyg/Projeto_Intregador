@@ -26,7 +26,7 @@ sequelize.sync()
     console.error('Erro ao sincronizar tabelas do banco de dados:', error);
 });
 
-app.use(express.json());
+app.use(express.json({force : true}));
 app.use(cors(corsOptions)); 
 
 app.use( userRoutes);

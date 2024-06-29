@@ -1,31 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import rest from './api';
 import '../historico_de_despesas.css';
 
 const HistoricoDespesas = () => {
-  // Exemplo de estado inicial com histórico de despesas
-  const [expenseHistory, setExpenseHistory] = useState([
-    {
-      tripCode: '001',
-      employeeId: '123',
-      receiptDate: '2024-06-01',
-      receiptCity: 'São Paulo',
-      expenseType: 'Transporte',
-      amountPaid: 'R$ 150,00',
-      description: 'Táxi do aeroporto ao hotel',
-      receipt: 'recibo1.pdf'
-    },
-    {
-      tripCode: '002',
-      employeeId: '124',
-      receiptDate: '2024-06-15',
-      receiptCity: 'Rio de Janeiro',
-      expenseType: 'Alimentação',
-      amountPaid: 'R$ 200,00',
-      description: 'Jantar de negócios',
-      receipt: 'recibo2.pdf'
-    }
-  ]);
+  const [expenseHistory, setExpenseHistory] = useState([]);
+
+  useEffect(() => {
+    const fetchExpenseHistory = async () => {
+      try {
+        const response = await rest.get('/listAllDespesas');
+        setExpenseHistory(response.data.despesas); // Certifique-se de que 'despesas' é o campo que a API retorna
+      } catch (error) {
+        console.error('Erro ao buscar histórico de despesas:', error);
+      }
+    };
+
+    fetchExpenseHistory();
+  }, []);
 
   return (
     <div>

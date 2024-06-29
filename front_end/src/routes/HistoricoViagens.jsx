@@ -1,27 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import rest from './api';
 import '../historico_viagens.css';
 
 const HistoricoViagens = () => {
-  // Exemplo de estado inicial com histórico de viagens
-  const [tripHistory, setTripHistory] = useState([
-    {
-      tripCode: '001',
-      employeeId: '123',
-      destination: 'São Paulo',
-      startDate: '2024-06-01',
-      endDate: '2024-06-10',
-      purpose: 'Reunião de Negócios'
-    },
-    {
-      tripCode: '002',
-      employeeId: '124',
-      destination: 'Rio de Janeiro',
-      startDate: '2024-06-15',
-      endDate: '2024-06-20',
-      purpose: 'Conferência'
-    }
-  ]);
+  const [tripHistory, setTripHistory] = useState([]);
+
+  useEffect(() => {
+    const fetchTripHistory = async () => {
+      try {
+        const response = await rest.get('/listViagem');
+        setTripHistory(response.data.trips); // Certifique-se de que 'trips' é o campo que a API retorna
+      } catch (error) {
+        console.error('Erro ao buscar histórico de viagens:', error);
+      }
+    };
+
+    fetchTripHistory();
+  }, []);
 
   return (
     <div>
@@ -53,12 +49,12 @@ const HistoricoViagens = () => {
         <tbody>
           {tripHistory.map((trip, index) => (
             <tr key={index}>
-              <td>{trip.tripCode}</td>
-              <td>{trip.employeeId}</td>
-              <td>{trip.destination}</td>
-              <td>{trip.startDate}</td>
-              <td>{trip.endDate}</td>
-              <td>{trip.purpose}</td>
+              <td>{trip.id}</td>
+              <td>{trip.idFuncionario}</td>
+              <td>{trip.cidade}</td>
+              <td>{trip.dataDeIda}</td>
+              <td>{trip.dataDeVolta}</td>
+              <td>{trip.objetivo}</td>
             </tr>
           ))}
         </tbody>

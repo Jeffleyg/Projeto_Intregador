@@ -2,7 +2,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database');
 
-const CadastrarViagem = sequelize.define('CadastrarViagem', {
+const CadastrarViagem = sequelize.define('cadastrarviagem', {
   idFuncionario: {
     type: DataTypes.STRING,
     allowNull: false
@@ -28,11 +28,11 @@ const CadastrarViagem = sequelize.define('CadastrarViagem', {
     allowNull: false
   }
 }, {
-  tableName: 'CadastrarViagem',
+  tableName: 'cadastrarviagem',
   timestamps: false,
   hooks: {
     beforeCreate: (user) => {
-        // Aqui você pode gerar um employeeId único automaticamente
+
         user.idFuncionario = generateEmployeeId(); // função para gerar o employeeId
     }
 }

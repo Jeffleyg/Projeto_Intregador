@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
 const tripService = require('../service/tripService');
-const tripModel = require('../models/cadastrarViagemModel');
 
 const registerViagem = async (req, res, next) => {
     try {
-        const trip = await tripService.register(req.body);
+        const trip = await tripService.registerViagem(req.body);
         res.status(201).json({ trip });
     } catch (error) {
         next(error);
@@ -13,7 +12,7 @@ const registerViagem = async (req, res, next) => {
 
 const listViagens = async (req, res, next) => {
     try {
-        const trips = await tripService.listAll();
+        const trips = await tripService.listAllViagem();
         res.status(200).json({ trips });
     } catch (error) {
         next(error);
@@ -22,7 +21,7 @@ const listViagens = async (req, res, next) => {
 
 const getViagemById = async (req, res, next) => {
     try {
-        const trip = await tripService.getById(req.params.id);
+        const trip = await tripService.getByIdViagem(req.params.id);
         res.status(200).json({ trip });
     } catch (error) {
         next(error);
@@ -31,8 +30,8 @@ const getViagemById = async (req, res, next) => {
 
 const updateViagem = async (req, res, next) => {
     try {
-        const trip = await tripService.update(req.params.id, req.body);
-        res.status(200).json({ trip });
+        const [rowsUpdated, [updatedTrip]] = await tripService.updateViagem(req.params.id, req.body);
+        res.status(200).json({ trip: updatedTrip });
     } catch (error) {
         next(error);
     }
@@ -40,7 +39,7 @@ const updateViagem = async (req, res, next) => {
 
 const deleteViagem = async (req, res, next) => {
     try {
-        await tripService.remove(req.params.id);
+        await tripService.removeViagem(req.params.id);
         res.status(200).json({ message: 'Deletado com sucesso' });
     } catch (error) {
         next(error);
@@ -49,16 +48,22 @@ const deleteViagem = async (req, res, next) => {
 
 const searchViagem = async (req, res, next) => {
     try {
-        const trip = await tripService.search(req.query);
-        res.status(200).json({ trip });
+        const { type, value } = req.query;
+        if (!type || !value) {
+            return res.status(400).json({ message: 'Parâmetros de busca inválidos' });
+        }
+
+        const trips = await tripService.searchViagem({ type, value });
+        res.status(200).json({ trips });
     } catch (error) {
+        console.error('Erro ao buscar viagens:', error);
         next(error);
     }
 };
 
 const listViagensByUser = async (req, res, next) => {
     try {
-        const trips = await tripService.listByUser(req.params.id);
+        const trips = await tripService.listViagensByUser(req.params.id);
         res.status(200).json({ trips });
     } catch (error) {
         next(error);
@@ -67,13 +72,12 @@ const listViagensByUser = async (req, res, next) => {
 
 const listViagensByDate = async (req, res, next) => {
     try {
-        const trips = await tripService.listByDate(req.query);
+        const trips = await tripService.listViagensByDate(req.query);
         res.status(200).json({ trips });
     } catch (error) {
         next(error);
     }
 };
-
 
 module.exports = {
     registerViagem,

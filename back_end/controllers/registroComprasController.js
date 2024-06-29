@@ -1,10 +1,11 @@
-
 const registroComprasService = require('../service/comprasService');
 const purchasesModel = require('../models/registroCompras');
 
 const registerCompra = async (req, res, next) => {
     try {
-        const purchase = await registroComprasService.register(req.body);
+        const { idFuncionario } = req.user; // Supondo que o idFuncionario está disponível em req.user
+        const purchaseData = { ...req.body, idFuncionario};
+        const purchase = await registroComprasService.registerCompra(purchaseData);
         res.status(201).json({ purchase });
     } catch (error) {
         next(error);
@@ -13,7 +14,7 @@ const registerCompra = async (req, res, next) => {
 
 const listCompras = async (req, res, next) => {
     try {
-        const purchases = await registroComprasService.listAll();
+        const purchases = await registroComprasService.listAllCompras();
         res.status(200).json({ purchases });
     } catch (error) {
         next(error);

@@ -1,72 +1,62 @@
-
-const Despesas = require('../models/despesasViagem');
-const transporter = require('../utils/mailer');
+const DespesasViagem = require('../models/despesasViagem');
 
 const registerDespesa = async (data) => {
-    const { idViagem, idFuncionario, dataNota, cidadeNota, tipoDespesa, valor, descricao, notaFiscal, opcoesAlimentacao, tipoHospedagem, preferenciaEstadia, meioTransporte, especificarOutroTransporte } = data;
-    if (!idViagem || !idFuncionario || !dataNota || !cidadeNota || !tipoDespesa || !valor || !descricao || !notaFiscal) {
-        throw new Error('Todos os campos são obrigatórios');
+    try {
+        console.log('Dados recebidos para cadastro:', data); // Log dos dados
+
+        const despesa = await DespesasViagem.create(data);
+
+        console.log('Despesa cadastrada com sucesso:', despesa); // Log do resultado
+        return despesa;
+    } catch (error) {
+        console.error('Erro ao cadastrar despesa no banco de dados:', error.message); // Log do erro
+        throw new Error('Erro ao cadastrar despesa no banco de dados');
     }
-
-    const dataLembrete = new Date(dataNota);
-    dataLembrete.setDate(dataLembrete.getDate() - 1);
-
-    const mailOptions = {
-        from: 'jeffley.garcon@estuante.uffs.edu.br',
-        to: email,
-        subject: 'Lembrete de despesa',
-        text: 'Lembrete de despesa'
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
-
-    return Despesas.create(data);
-}
+};
 
 const listAllDespesas = async () => {
-    return Despesas.find();
+    try {
+        const despesas = await DespesasViagem.findAll();
+        return despesas;
+    } catch (error) {
+        throw new Error('Erro ao listar despesas no banco de dados');
+    }
 };
 
 const getByIdDespesa = async (id) => {
-    return Despesas.findById(id);
+    try {
+        const despesa = await DespesasViagem.findByPk(id);
+        return despesa;
+    } catch (error) {
+        throw new Error('Erro ao buscar despesa por ID no banco de dados');
+    }
 };
 
 const updateDespesa = async (id, data) => {
-    const { dataNota, email } = data;
-
-    if (!dataNota) {
-        throw new Error('Data da nota é obrigatória');
-    }
-
-    const dataLembrete = new Date(dataNota);
-    dataLembrete.setDate(dataLembrete.getDate() - 1);
-
-    const mailOptions = {
-        from: 'jeffley.garcon@estudante.uffs.edu.br',
-        to: email,
-        subject: 'Lembrete de despesa',
-        text: 'Lembrete de despesa'
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error(error);
-        } else {
-            console.log('Email sent: ' + info.response);
+    try {
+        const despesa = await DespesasViagem.findByPk(id);
+        if (!despesa) {
+            throw new Error('Despesa não encontrada');
         }
-    });
 
-    return Despesas.findByIdAndUpdate
-}
+        // Atualiza os campos desejados
+        const updatedDespesa = await despesa.update(data);
+        return updatedDespesa;
+    } catch (error) {
+        throw new Error('Erro ao atualizar despesa no banco de dados');
+    }
+};
 
 const removeDespesa = async (id) => {
-    return Despesas.findByIdAndDelete(id);
+    try {
+        const despesa = await DespesasViagem.findByPk(id);
+        if (!despesa) {
+            throw new Error('Despesa não encontrada');
+        }
+        await despesa.destroy();
+    } catch (error) {
+        throw new Error('Erro ao deletar despesa no banco de dados');
+    }
 };
 
 module.exports = {
