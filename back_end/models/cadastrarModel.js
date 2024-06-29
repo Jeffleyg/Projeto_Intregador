@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database');
 
-const Cadastro = sequelize.define('Cadastro', {
+const Cadastro = sequelize.define('cadastros', {
     firstName: {
         type: DataTypes.STRING,
         allowNull: false

@@ -1,3 +1,4 @@
+// App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './routes/Login';
@@ -17,6 +18,7 @@ import BuscaViagem from './routes/BuscaViagem';
 import ForgotPassword from './routes/ForgotPassword';
 import LoginAdmin from './routes/LoginAdmin';
 import HomeAdmin from './routes/HomeAdmin';
+import ViagemContainer from './routes/ViagemContainer';
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/loginAdmin" element={<LoginAdmin />} />
         <Route path="/homeAdmin" element={<HomeAdmin />} />
+        <Route path="/viagem" element={<ViagemContainer />} />
       </Routes>
     </Router>
   );

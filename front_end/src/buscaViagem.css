@@ -51,3 +51,22 @@
 .search-input button:hover {
     background-color: #45a049;
 }
+
+.viagem-list {
+    margin: 20px;
+    padding: 10px;
+}
+
+.viagem-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.viagem-list th, .viagem-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.viagem-list th {
+    background-color: #f4f4f4;
+}

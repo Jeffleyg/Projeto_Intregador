@@ -12,12 +12,17 @@ const CadastroAdmin = sequelize.define('cadastroadmin', {
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false
-  }
+  },
+  role: {
+        type: DataTypes.STRING,
+        defaultValue: 'admin'
+    }
 });
 
 module.exports = CadastroAdmin;

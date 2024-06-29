@@ -3,6 +3,7 @@ const transporter = require('../utils/mailer');
 
 const registerCompra = async (data) => {
     const { idViagem, idFuncionario, dataNota, cidadeNota, tipoDespesa, valor, descricao, notaFiscal, opcoesAlimentacao, tipoHospedagem, preferenciaEstadia, meioTransporte, especificarOutroTransporte } = data;
+    
     if (!idViagem || !idFuncionario || !dataNota || !cidadeNota || !tipoDespesa || !valor || !descricao || !notaFiscal) {
         throw new Error('Todos os campos são obrigatórios');
     }
@@ -11,8 +12,8 @@ const registerCompra = async (data) => {
     dataLembrete.setDate(dataLembrete.getDate() - 1);
 
     const mailOptions = {
-        from: 'jeffley.garcon@estudante.uffs.edu.br',
-        to: email,
+        from: 'jeffleygarcon007@gmail.com',
+        to: 'jeffleygarcon0@gmail.com',
         subject: 'Lembrete de despesa',
         text: 'Lembrete de despesa'
     };
@@ -26,10 +27,10 @@ const registerCompra = async (data) => {
     });
 
     return Despesas.create(data);
-}
+};
 
 const listAllCompras = async () => {
-    return Despesas.find();
+    return Despesas.findAll();
 };
 
 const getByIdCompra = async (id) => {
@@ -60,11 +61,18 @@ const updateCompra = async (id, data) => {
             console.log('Email sent: ' + info.response);
         }
     });
-}
+
+    return Despesas.findByIdAndUpdate(id, data, { new: true });
+};
+
+const removeCompra = async (id) => {
+    return Despesas.findByIdAndDelete(id);
+};
 
 module.exports = {
     registerCompra,
     listAllCompras,
     getByIdCompra,
-    updateCompra
+    updateCompra,
+    removeCompra
 };

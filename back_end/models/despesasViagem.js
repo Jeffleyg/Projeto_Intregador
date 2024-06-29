@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database');
 
-const DespesasViagem = sequelize.define('DespesasViagem', {
+const DespesasViagem = sequelize.define('despesasviagem', {
     idViagem: {
         type: DataTypes.STRING,
         allowNull: false
@@ -31,31 +31,31 @@ const DespesasViagem = sequelize.define('DespesasViagem', {
         allowNull: false
     },
     notaFiscal: {
-        type: DataTypes.BLOB('long'), // assuming you want to store the file as binary data
+        type: DataTypes.STRING, // Altere para STRING para armazenar o caminho ou URL do arquivo
         allowNull: false
     },
     opcoesAlimentacao: {
         type: DataTypes.JSON,
-        allowNull: true // Make this field optional
+        allowNull: true
     },
     tipoHospedagem: {
         type: DataTypes.STRING,
-        allowNull: true // Make this field optional
+        allowNull: true
     },
     preferenciaEstadia: {
         type: DataTypes.STRING,
-        allowNull: true // Make this field optional
+        allowNull: true
     },
     meioTransporte: {
         type: DataTypes.STRING,
-        allowNull: true // Make this field optional
+        allowNull: true
     },
     especificarOutroTransporte: {
         type: DataTypes.STRING,
-        allowNull: true // Make this field optional
+        allowNull: true
     }
 }, {
-    tableName: 'despesasViagem',
+    tableName: 'despesasviagem',
     timestamps: false
 });
 

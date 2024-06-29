@@ -2,7 +2,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database');
 
-const RegistroCompras = sequelize.define('RegistroCompras', {   
+const RegistroCompras = sequelize.define('registroCompras', {   
     idFuncionario: {
         type: DataTypes.STRING,
         allowNull: false
@@ -40,7 +40,7 @@ const RegistroCompras = sequelize.define('RegistroCompras', {
         allowNull: false
     }
 }, {
-    tableName: 'compras',
+    tableName: 'registrocompras',
     timestamps: false
 });
 
