@@ -21,6 +21,21 @@ const listCompras = async (req, res, next) => {
     }
 }
 
+const listComprasByUser = async (req, res, next) => {
+    try {
+        const id = req.user?.id; // Obtém o ID do funcionário a partir do usuário autenticado
+
+        if (!id) {
+            return res.status(400).json({ error: 'ID do funcionário não encontrado' });
+        }
+
+        const purchases = await registroComprasService.listAllComprasByUser(id);
+        res.status(200).json({ purchases });
+    } catch (error) {
+        next(error);
+    }
+}
+
 const getCompraById = async (req, res, next) => {
     try {
         const purchase = await registroComprasService.getById(req.params.id);
@@ -53,5 +68,6 @@ module.exports = {
     listCompras,
     getCompraById,
     updateCompra,
-    deleteCompra
+    deleteCompra,
+    listComprasByUser
 }

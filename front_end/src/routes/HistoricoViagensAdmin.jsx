@@ -9,7 +9,7 @@ const HistoricoViagensAdmin = () => {
   useEffect(() => {
     const fetchTripHistory = async () => {
       try {
-        const response = await rest.get('/listViagensByUser');
+        const response = await rest.get('/listViagem');
         setTripHistory(response.data.trips); // Certifique-se de que 'trips' é o campo que a API retorna
       } catch (error) {
         console.error('Erro ao buscar histórico de viagens:', error);

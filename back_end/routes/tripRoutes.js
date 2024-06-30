@@ -10,5 +10,6 @@ router.get('/listViagem/:id', tripController.getViagemById);
 router.put('/updateViagem/:id', tripController.updateViagem);
 router.delete('/deleteViagem/:id', tripController.deleteViagem);
 router.get('/searchViagem', tripController.searchViagem);
+router.get('/listViagemByUser', tripController.listViagensByUser);
 
 module.exports = router;
