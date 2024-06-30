@@ -86,11 +86,11 @@ const loginUsuario = async (req, res, next) => {
         const { email, password } = req.body;
         const user = await userServices.loginUsuario({ email, password });
         if (user) {
-            const token = jwt.sign({ email, role: 'usuario' }, SECRET_KEY, { expiresIn: 3600 });
-            res.status(200).json({ auth: true, message: "login realizado com sucesso",token});
-          } else {
+            const token = jwt.sign({ email: user.email, role: 'usuario' }, SECRET_KEY, { expiresIn: 3600 });
+            res.status(200).json({ auth: true, message: "login realizado com sucesso", token });
+        } else {
             res.status(401).json({ erro: 'Credenciais inválidas' });
-          }
+        }
     } catch (error) {
         console.error('Erro ao logar usuário:', error);
         next(error);

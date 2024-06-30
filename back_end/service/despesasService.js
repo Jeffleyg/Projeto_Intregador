@@ -23,6 +23,15 @@ const listAllDespesas = async () => {
     }
 };
 
+const listAllDespesasByUser = async (id) => {
+    try {
+        const despesas = await DespesasViagem.findAll({ where: { idFuncionario: id } });
+        return despesas;
+    } catch (error) {
+        throw new Error('Erro ao listar despesas no banco de dados');
+    }
+};
+
 const getByIdDespesa = async (id) => {
     try {
         const despesa = await DespesasViagem.findByPk(id);
@@ -64,5 +73,6 @@ module.exports = {
     listAllDespesas,
     getByIdDespesa,
     updateDespesa,
-    removeDespesa
+    removeDespesa,
+    listAllDespesasByUser
 };
