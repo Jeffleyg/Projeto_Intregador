@@ -1,0 +1,59 @@
+div {
+    font-family: 'Arial', sans-serif;
+    background-color: #A6A2A2;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+  
+  nav tr {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav tr th {
+    margin-left: 20px;
+  }
+  
+  nav tr th a {
+    color: white;
+    text-decoration: none;
+    color:black;
+  }
+  
+  .is {
+    margin-top: 20px;
+    color:black;
+  }
+  
+  #purchase-history {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  #purchase-history th, #purchase-history td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    color:black;
+  }
+  
+  #purchase-history th {
+    background-color: #f4f4f9;
+  }
+  

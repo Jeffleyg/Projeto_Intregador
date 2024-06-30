@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../style_create_account.css';
 
 function CreateEmployeeAccount() {
@@ -41,6 +41,7 @@ function CreateEmployeeAccount() {
   };
 
   return (
+    <body> 
     <div className="login-card-container">
       <div className="login-card">
         <h1>Create Employee Account</h1>
@@ -88,6 +89,8 @@ function CreateEmployeeAccount() {
         </div>
       </div>
     </div>
+
+    </body>
   );
 }
 

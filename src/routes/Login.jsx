@@ -21,14 +21,15 @@ function Login({ onLoginSuccess }) {
   };
 
   return (
+    <div>
     <div className="login-card-container">
       <div className="login-card">
         <div className="login-card-logo">
           <img src="logoFelishop.jpg" alt="logo" />
         </div>
         <div className="login-card-header">
-          <h1>Sign In</h1>
-          <div>Please login to use the platform</div>
+          <h1 className="sign">Sign In</h1>
+          <div className="login">Please login to use the platform</div>
         </div>
         <form className="login-card-form" id="loginForm" onSubmit={handleSubmit}>
           <div className="form-item">
@@ -73,6 +74,8 @@ function Login({ onLoginSuccess }) {
           </a>
         </div>
       </div>
+    </div>
+
     </div>
   );
 }

@@ -1,8 +1,10 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 20px;
+    background-color: #625C5C;
+    color: #625C5C;
+    margin: 60px;
+    padding: 25px;
+    
   }
   
   .account-card-container {
@@ -10,13 +12,15 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #625C5C;
   }
   
   .account-card {
     background-color: #ffffff;
+    color: #625C5C;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(249, 246, 246, 0.975);
     width: 100%;
     max-width: 400px;
     text-align: center;
@@ -39,13 +43,13 @@ body {
   .account-card input[type="file"] {
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #625C5C;
     border-radius: 4px;
   }
   
   .account-card button[type="submit"] {
     padding: 10px;
-    background-color: #333;
+    background-color: #625C5C;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -54,7 +58,7 @@ body {
   }
   
   .account-card button[type="submit"]:hover {
-    background-color: #555;
+    background-color: #625C5C;
   }
   
   .account-card-footer {
@@ -62,7 +66,7 @@ body {
   }
   
   .account-card-footer a {
-    color: #333;
+    color: #625C5C;
     text-decoration: none;
   }
   

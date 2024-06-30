@@ -4,9 +4,9 @@ import '../Style.css';
 
 function HeaderRoutes() {
   return (
-    <header>
+    <header className="tet">
       <div className="header-content">
-        <h1>Perfil do Usuário</h1>
+        <h1 className="pe">Perfil do Usuário</h1>
         <nav>
           <ul>
             <li><Link to="/home">Dashboard</Link></li>

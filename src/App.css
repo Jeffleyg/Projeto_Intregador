@@ -1,8 +1,8 @@
 /* Estilo do tema escuro */
 body {
   font-family: Arial, sans-serif;
-  background-color: #222;
-  color: #fff;
+  background-color: #625C5C;
+  color: #625C5C;
   margin: 0;
   padding: 0;
 }
@@ -11,7 +11,7 @@ header {
   text-align: center;
   padding: 20px;
   background-color: #004d26; /* Cor verde mais escura seguindo a identidade visual da UFFS */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  box-shadow: 0 4px 8px #673D3D(0, 0, 0, 0.2); /* Sombra suave */
 }
 
 header img {
@@ -24,7 +24,7 @@ header img {
 header h1 {
   font-size: 32px; /* Tamanho aumentado */
   margin-top: 20px; /* Espaçamento maior do topo */
-  color: #fff; /* Cor do texto */
+  color: #673D3D; /* Cor do texto */
 }
 
 #container {

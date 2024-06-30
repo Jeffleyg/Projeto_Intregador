@@ -16,10 +16,14 @@ import CadastraViagem from './routes/CadastraViagem';
 import BuscaViagem from './routes/BuscaViagem';
 import ForgotPassword from './routes/ForgotPassword';
 
+
+
 function App() {
   return (
+    
     <Router>
       <Routes>
+      
         <Route path="/" element={<Login onLoginSuccess={() => {}} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/perfil" element={<Perfil />} />

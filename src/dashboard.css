@@ -1,21 +1,21 @@
 /* Estilos globais */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-color: #673D3D ;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #673D3D;
 }
 
 /* Estilos do cabeçalho */
 .header {
-    background-color: #333;
-    color: white;
+    background-color: #673D3D;
+    color: #673D3D;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px #673D3D(0, 0, 0, 0.1);
 }
 
 .logo img {
@@ -36,23 +36,23 @@ body {
 }
 
 .nav-menu ul li a {
-    color: white;
+    color:white;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
 }
 
 .nav-menu ul li a:hover {
-    color: #ddd;
+    color: #cd1a1a;
 }
 
 .nav-menu ul li ul {
     display: none;
     position: absolute;
-    background-color: #333;
+    background-color: #625C5C;
     padding: 10px;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(32, 223, 99, 0.1);
     top: 100%;
     left: 0;
     z-index: 1000;
@@ -79,7 +79,9 @@ body {
 
 /* Estilos do conteúdo principal */
 main {
-    padding: 20px;
+    padding: auto;
+    background-color: #625C5C;
+    color: #625C5C;
 }
 
 h1 {
@@ -95,7 +97,7 @@ h1 {
 }
 
 .dashboard .widget {
-    background-color: #fff;
+    background-color: #625C5C;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex: 1 1 calc(33.333% - 40px);
@@ -111,13 +113,20 @@ h1 {
 .widget h3 {
     margin: 0;
     font-size: 1.2em;
-    color: #333;
+    color: black;
 }
 
 .widget p {
     margin: 10px 0 0;
     font-size: 1.5em;
-    color: #555;
+    color: white;
+}
+
+.tasks h3{
+    margin: 10px 0 0;
+    font-size: 1.5em;
+    color: black;
+
 }
 
 /* Estilos dos gráficos */
@@ -139,7 +148,8 @@ h1 {
 }
 
 .tasks ul li {
-    background-color: #fff;
+    background-color: #625C5C;
+    color:white;
     padding: 10px;
     margin-bottom: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -150,6 +160,7 @@ h1 {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
+    color:  black;
 }
 
 .filters select {
@@ -159,21 +170,23 @@ h1 {
     max-width: 300px;
     font-size: 1em;
     border-radius: 8px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #fff;
+    box-shadow: 0 2px 4px rgba(241, 239, 239, 0.982);
     transition: border-color 0.3s;
+    color: #A6A2A2;
 }
 
 .filters select:focus {
-    border-color: #333;
+    border-color: #A6A2A2;
+    color: #A6A2A2;
 }
 
 /* Estilos do rodapé */
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #333;
-    color: white;
+    background-color: #625C5C;
+    color: #A6A2A2;
     margin-top: 10px;
     /* box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); */
 }

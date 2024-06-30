@@ -38,7 +38,7 @@ const HistoricoViagens = () => {
           </ul>
         </nav>
       </header>
-      <h1>Histórico de Viagens</h1>
+    <h1 className="is">Histórico de Viagens</h1>
       <table id="trip-history">
         <thead>
           <tr>

@@ -42,7 +42,7 @@ const HistoricoDespesas = () => {
           </ul>
         </nav>
       </header>
-      <h1>Histórico de Despesas de Viagem</h1>
+      <h1 className="des">Histórico de Despesas de Viagem</h1>
       <table id="expense-history">
         <thead>
           <tr>

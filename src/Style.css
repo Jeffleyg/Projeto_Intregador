@@ -2,28 +2,35 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f0f2f5;
-    color: #333;
+    background: #625C5C;
+    color: #625C5C;
 }
 
-header {
-    background-color: #0056b3;
-    color: white;
+
+
+.tet {
+    background-color: #673D3D;
+    color: #625C5C;
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header-content h1 {
+.header-content  {
     margin: 0;
     font-size: 24px;
+    color: #625C5C;
+}
+.pe{
+    color:black
 }
 
-nav ul {
+nav ul  {
     list-style: none;
     display: flex;
     gap: 20px;
+    color:black;
 }
 
 nav ul li a {
@@ -35,7 +42,7 @@ nav ul li a {
 }
 
 nav ul li a.active, nav ul li a:hover {
-    background-color: #003580;
+    background-color: #673D3D;
 }
 
 main {
@@ -47,11 +54,12 @@ section {
     padding: 20px;
     margin-top: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px #673D3D(0,0,0,0.1);
 }
 
 h2 {
-    color: #0056b3;
+    color: #673D3D;
+    
 }
 
 .info, .settings {
@@ -81,7 +89,7 @@ input[type="checkbox"] {
 button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #0056b3;
+    background-color: #673D3D;
     color: white;
     border: none;
     border-radius: 5px;
@@ -90,7 +98,7 @@ button {
 }
 
 button:hover {
-    background-color: #003580;
+    background-color: #673D3D;
 }
 
 footer {

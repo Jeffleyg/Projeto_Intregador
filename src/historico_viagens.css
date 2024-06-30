@@ -1,6 +1,6 @@
-body {
+div {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
+  background-color: #A6A2A2;
   margin: 0;
   padding: 20px;
 }
@@ -32,10 +32,11 @@ nav ul li {
 nav ul li a {
   color: white;
   text-decoration: none;
+  color:black;
 }
-
-h1 {
+.is {
   margin-top: 20px;
+  color:black;
 }
 
 #trip-history {
@@ -48,6 +49,7 @@ h1 {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
+  color:black;
 }
 
 #trip-history th {

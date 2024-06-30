@@ -1,6 +1,6 @@
-body {
+div {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-color: #A6A2A2;
     margin: 0;
     padding: 20px;
   }
@@ -27,15 +27,18 @@ body {
   
   nav ul li {
     margin-left: 20px;
+    color:black;
   }
   
   nav ul li a {
     color: white;
     text-decoration: none;
+    color:black;
   }
   
-  h1 {
+  .des {
     margin-top: 20px;
+    color:black;
   }
   
   #expense-history {
@@ -48,6 +51,7 @@ body {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: left;
+    color:black;
   }
   
   #expense-history th {

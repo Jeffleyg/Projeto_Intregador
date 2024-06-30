@@ -2,17 +2,22 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #625C5C;
     border-radius: 5px;
+    background-color: #625C5C;
+    color:black;
 }
 
 .form-group {
     margin-bottom: 15px;
+    background-color: #625C5C;
+    color:black;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
+    color: black;
 }
 
 input[type="text"],
@@ -22,8 +27,9 @@ button {
     width: 100%;
     padding: 8px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #625C5C;
     border-radius: 3px;
+    
 }
 
 button {

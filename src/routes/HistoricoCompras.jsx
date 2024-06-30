@@ -41,7 +41,7 @@ const HistoricoCompras = () => {
           </ul>
         </nav>
       </header>
-      <h1>Histórico de Compras de Viagem</h1>
+      <h1 className="is">Histórico de Compras de Viagem</h1>
       <table id="purchase-history">
         <thead>
           <tr>
