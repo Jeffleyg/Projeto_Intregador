@@ -9,48 +9,48 @@ function HomeAdmin() {
       <header className="header">
         <div className="logo">
           <img src="logoFelishop.jpg" alt="FelisShop Logo" />
-        </div>
+        </div> 
         <nav className="nav-menu">
           <ul className="menu-items">
-            <li><Link to="/home">Home</Link></li>
-            <li><Link to="/perfil">Perfil</Link></li>
+            <li><Link to="/homeAdmin">Home</Link></li>
+            <li><Link to="/perfilAdmin">Perfil</Link></li>
             <li>
               <Link to="#">Cadastros</Link>
               <ul>
-                <li><Link to="/cadastrarFuncionario">Cadastrar Funcionário</Link></li>
-                <li><Link to="/cadastrarViagem">Cadastrar Viagem</Link></li>
-                <li><Link to="/cadastrarDespesas">Cadastrar Despesas da Viagem</Link></li>
-                <li><Link to="/registroCompras">Registrar Compras da Viagem</Link></li>
-                <li><Link to="/manterCadastro">Manter Cadastro de Produtos</Link></li>
-                <li><Link to="/manterCadastro">Manter Cadastro de Produtos</Link></li>
-                <li><Link to="/listaViagem">Lista de viagem</Link></li>
-                <li><Link to="/listaDespesa">Lista de despesa</Link></li>
-                <li><Link to="/listaCompra">Lista de compra</Link></li>
-                <li><Link to="/listaProduto">Lista de produto</Link></li>
-                <li><Link to="/listaFuncionario">Lista de funcionario</Link></li>
-                <li><Link to="/excluirFuncionario"> Excluir funcionario</Link></li>
-                <li><Link to="/excluirProduto"> Excluir produto</Link></li>
-                <li><Link to="/excluirCompra"> Excluir compra</Link></li>
-                <li><Link to="/excluirDespesa"> Excluir despesa</Link></li>
-                <li><Link to="/excluirViagem"> Excluir viagem</Link></li>
-                <li><Link to = "/excluirViagem"> Excluir viagem</Link></li>
-                <li><Link to="/atualizarFuncionario"> Atualizar funcionario</Link></li>
-                <li><Link to="/atualizarProduto"> Atualizar produto</Link></li>
-                <li><Link to="/atualizarCompra"> Atualizar compra</Link></li>
-                <li><Link to="/atualizarDespesa"> Atualizar despesa</Link></li>
+                <li><Link to="/cadastrarFuncionarioAdmin">Cadastrar Funcionário</Link></li>
+                <li><Link to="/cadastrarViagemAdmin">Cadastrar Viagem</Link></li>
+                <li><Link to="/cadastrarDespesasAdmin">Cadastrar Despesas da Viagem</Link></li>
+                <li><Link to="/registroComprasAdmin">Registrar Compras da Viagem</Link></li>
+                <li><Link to="/manterCadastroAdmin">Manter Cadastro de Produtos</Link></li>
+                <li><Link to="/manterCadastroAdmin">Manter Cadastro de Produtos</Link></li>
+                <li><Link to="/listaViagemAdmin">Lista de viagem</Link></li>
+                <li><Link to="/listaDespesaAdmin">Lista de despesa</Link></li>
+                <li><Link to="/listaCompraAdmin">Lista de compra</Link></li>
+                <li><Link to="/listaProdutoAdmin">Lista de produto</Link></li>
+                <li><Link to="/listaFuncionarioAdmin">Lista de funcionario</Link></li>
+                {/* <li><Link to="/excluirFuncionarioAdmin"> Excluir funcionario</Link></li>
+                <li><Link to="/excluirProdutoAdmin"> Excluir produto</Link></li>
+                <li><Link to="/excluirCompraAdmin"> Excluir compra</Link></li>
+                <li><Link to="/excluirDespesaAdmin"> Excluir despesa</Link></li>
+                <li><Link to="/excluirViagemAdmin"> Excluir viagem</Link></li>
+                <li><Link to = "/excluirViagemAdmin"> Excluir viagem</Link></li>
+                <li><Link to="/atualizarFuncionarioAdmin"> Atualizar funcionario</Link></li>
+                <li><Link to="/atualizarProdutoAdmin"> Atualizar produto</Link></li>
+                <li><Link to="/atualizarCompraAdmin"> Atualizar compra</Link></li>
+                <li><Link to="/atualizarDespesaAdmin"> Atualizar despesa</Link></li> */}
                 
               </ul>
             </li>
             <li>
               <Link to="#">Visualizações</Link>
               <ul>
-                <li><Link to="/HistoricoViagens"> Histórico das Viagens</Link></li>
-                <li><Link to="/HistoricoDespesas"> Histórico das Despesas de uma Viagem</Link></li>
-                <li><Link to="/HistoricoCompras"> Histórico de Compras de uma Viagem</Link></li>
-                <li><Link to="/buscaViagem">Buscar Viagem</Link></li>
+                <li><Link to="/HistoricoViagensAdmin"> Histórico das Viagens</Link></li>
+                <li><Link to="/HistoricoDespesasAdmin"> Histórico das Despesas de uma Viagem</Link></li>
+                <li><Link to="/HistoricoComprasAdmin"> Histórico de Compras de uma Viagem</Link></li>
+                <li><Link to="/buscaViagemAdmin">Buscar Viagem</Link></li>
               </ul>
             </li>
-            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/">Sair</Link></li>
           </ul>
         </nav>
       </header>
