@@ -9,7 +9,7 @@ const HistoricoDespesas = () => {
   useEffect(() => {
     const fetchExpenseHistory = async () => {
       try {
-        const response = await rest.get('/listAllDespesas');
+        const response = await rest.get('/listDespesasByUser');
         setExpenseHistory(response.data.despesas); // Certifique-se de que 'despesas' é o campo que a API retorna
       } catch (error) {
         console.error('Erro ao buscar histórico de despesas:', error);

@@ -99,6 +99,21 @@ const listAllDespesas = async (req, res, next) => {
     }
 };
 
+const listAllDespesasByUser = async (req, res, next) => {
+    try {
+        const id = req.user?.id; // Obtém o ID do funcionário a partir do usuário autenticado
+
+        if (!id) {
+            return res.status(400).json({ error: 'ID do funcionário não encontrado' });
+        }
+
+        const despesas = await despesasService.listAllDespesasByUser(id);
+        res.status(200).json({ despesas });
+    } catch (error) {
+        console.error('Erro ao listar despesas por usuário:', error);
+        res.status(500).json({ error: 'Erro interno ao listar despesas por usuário' });
+    }
+};
 const getDespesaById = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -147,5 +162,6 @@ module.exports = {
     listAllDespesas,
     getDespesaById,
     updateDespesa,
-    deleteDespesa
+    deleteDespesa,
+    listAllDespesasByUser
 };

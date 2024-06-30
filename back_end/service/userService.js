@@ -74,7 +74,7 @@ const search = async (firstName) => {
 };
 
 const loginUsuario = async ({ email, password }) => {
-    const user = await Cadastro.findOne({ email, password });
+    const user = await Cadastro.findOne({where:{ email, password }});
     if (!user) {
         throw new Error('Usuário não encontrado');
     }
@@ -82,7 +82,7 @@ const loginUsuario = async ({ email, password }) => {
 };
 
 const loginAdmin = async ({ email, password }) => {
-    const user = await CadastroAdmin.findOne({ email, password });
+    const user = await CadastroAdmin.findOne({where:{ email, password }});
     if (!user) {
         throw new Error('Usuário não encontrado');
     }

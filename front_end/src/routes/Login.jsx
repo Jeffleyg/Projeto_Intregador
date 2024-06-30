@@ -1,24 +1,36 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa o hook de navegação
+import { useNavigate } from 'react-router-dom';
 import '../style_login.css';
-
+import rest from './api';
 
 function Login({ onLoginSuccess }) {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const email = document.getElementById('emailForm').value;
     const password = document.getElementById('passwordForm').value;
-    // Verificação simples de login hard-coded
-    if (email === "jeffley@gmail.com" && password === "1234") {
-      onLoginSuccess();
-      navigate('/home'); // Redireciona para a página "home"
-    } else {
-      alert('Invalid username or password!');
+    
+    try {
+      const response = await rest.post('/loginUsuario', { email, password });
+      console.log('Login response:', response);
+      if (response.data.auth) {
+        onLoginSuccess();
+        navigate('/home'); // Redireciona para a página "home"
+      } else {
+        alert('Invalid username or password!');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      if (error.response) {
+        console.error('Error response data:', error.response.data);
+        alert(`Login error: ${error.response.data.erro || 'Please try again later.'}`);
+      } else {
+        alert('An error occurred during login. Please try again later.');
+      }
     }
   };
 

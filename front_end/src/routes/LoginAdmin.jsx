@@ -8,7 +8,7 @@ import rest from './api';
 function LoginAdmin({ onLoginSuccess }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,17 +24,23 @@ function LoginAdmin({ onLoginSuccess }) {
 
   try {
       const response = await rest.post('loginAdmin', formData);
+      console.log('login response:', response);
 
       if (response.status === 200) {
           const authToken = response.data.token;
           navigate('/HomeAdmin', { state: { token: authToken } });
       } else {
-          setError('Credenciais inválidas');
+          alert('Credenciais inválidas');
       }
   } catch (error) {
       console.error('Erro ao fazer login:', error);
-      setError('Email ou Senha invalida !');
+      if (error.response) {
+          console.error('Erro de resposta:', error.response.data);
+          alert(`Erro no login: ${error.response.data.erro || 'Tente novamente mais tarde.'}`);
+      } else {
+        alert('An error occurred during login. Please try again later.');
   }
+}
 };
 
   return (
