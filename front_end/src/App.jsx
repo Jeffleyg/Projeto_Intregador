@@ -1,4 +1,4 @@
-// App.jsx
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './routes/Login';
@@ -19,6 +19,21 @@ import ForgotPassword from './routes/ForgotPassword';
 import LoginAdmin from './routes/LoginAdmin';
 import HomeAdmin from './routes/HomeAdmin';
 import ViagemContainer from './routes/ViagemContainer';
+import CadastrarDespesasAdmin from './routes/Cadastrar_de_despesasAdmin';
+import SettingsAdmin from './routes/SettingsAdmin';
+import AjudaAdmin from './routes/AjudaAdmin';
+import RegistroComprasAdmin from './routes/RegistroComprasAdmin';
+import HistoricoComprasAdmin from './routes/HistoricoComprasAdmin';
+import HistoricoDespesasAdmin from './routes/HistoricoDespesasAdmin';
+import HistoricoViagensAdmin from './routes/HistoricoViagensAdmin';
+import ManterCadastroComprasAdmin from './routes/ManterCadastroComprasAdmin';
+import CadastraViagemAdmin from './routes/CadastraViagemAdmin';
+import BuscaViagemAdmin from './routes/BuscaViagemAdmin';
+import ForgotPasswordAdmin from './routes/ForgotPasswordAdmin';
+import ViagemContainerAdmin from './routes/ViagemContainerAdmin';
+import PerfilAdmin from './routes/PerfilAdmin';
+import HeaderRoutes from './routes/HeaderRoutes';
+
 
 function App() {
   return (
@@ -42,6 +57,23 @@ function App() {
         <Route path="/loginAdmin" element={<LoginAdmin />} />
         <Route path="/homeAdmin" element={<HomeAdmin />} />
         <Route path="/viagem" element={<ViagemContainer />} />
+        <Route path="/loginAdmin" element={<LoginAdmin />} />
+        <Route path="/homeAdmin" element={<HomeAdmin />} />
+        <Route path="/cadastrarDespesasAdmin" element={<CadastrarDespesasAdmin />} />
+        <Route path="/configuracoesAdmin" element={<SettingsAdmin />} />
+        <Route path="/ajudaAdmin" element={<AjudaAdmin />} />
+        <Route path="/registroComprasAdmin" element={<RegistroComprasAdmin />} />
+        <Route path="/historicoComprasAdmin" element={<HistoricoComprasAdmin />} />
+        <Route path="/historicoDespesasAdmin" element={<HistoricoDespesasAdmin />} />
+        <Route path="/historicoViagensAdmin" element={<HistoricoViagensAdmin />} />
+        <Route path="/manterCadastroAdmin" element={<ManterCadastroComprasAdmin />} />
+        <Route path="/cadastrarViagemAdmin" element={<CadastraViagemAdmin />} />
+        <Route path="/buscaViagemAdmin" element={<BuscaViagemAdmin />} />
+        <Route path="/forgotPasswordAdmin" element={<ForgotPasswordAdmin />} />
+        <Route path="/viagemAdmin" element={<ViagemContainerAdmin />} />
+        <Route path="/perfilAdmin" element={<PerfilAdmin />} />
+        <Route path="/headerRoutes" element={<HeaderRoutes />} />
+
       </Routes>
     </Router>
   );

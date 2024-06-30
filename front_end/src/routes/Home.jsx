@@ -32,7 +32,7 @@ function Home() {
                 <li><Link to="/buscaViagem">Buscar Viagem</Link></li>
               </ul>
             </li>
-            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/">Sair</Link></li>
           </ul>
         </nav>
       </header>

@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../ajuda.css';
 
-const Ajuda = () => {
+const AjudaAdmin = () => {
   return (
     <div>
       <header>
@@ -11,8 +10,8 @@ const Ajuda = () => {
           <h1>Central de Ajuda</h1>
           <nav>
             <ul>
-              <li><Link to="/home">Dashboard</Link></li>
-              <li><Link to="/ajuda" className="active">Ajuda</Link></li>
+              <li><Link to="/homeAdmin">Dashboard</Link></li>
+              <li><Link to="/ajudaAdmin" className="active">Ajuda</Link></li>
             </ul>
           </nav>
         </div>
@@ -45,4 +44,4 @@ const Ajuda = () => {
   );
 };
 
-export default Ajuda;
+export default AjudaAdmin;
