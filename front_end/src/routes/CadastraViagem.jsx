@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../cadastraViagem.css';
+import rest from './api'; // Ajuste o caminho conforme necessário
 
 const CadastraViagem = () => {
     // State para armazenar os dados do formulário
@@ -12,7 +13,6 @@ const CadastraViagem = () => {
         descricao: ''
     });
 
-    // Função para lidar com a mudança nos campos do formulário
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -21,21 +21,26 @@ const CadastraViagem = () => {
         }));
     };
 
-    // Função para lidar com o envio do formulário
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Simulação de envio dos dados e notificação por email
-        console.log(formData);
-        alert(`Viagem cadastrada para o funcionário ${formData.idFuncionario}. Um email será enviado para notificação.`);
-        // Resetar o estado do formulário depois do envio, se necessário
-        setFormData({
-            idFuncionario: '',
-            dataViagem: '',
-            dataVoltaViagem: '',
-            cidade: '',
-            objetivo: '',
-            descricao: ''
-        });
+        try {
+            // Enviar os dados para a API
+            const response = await rest.post('/registerViagem', formData);
+            console.log('Viagem cadastrada:', response.data);
+            alert('Viagem cadastrada com sucesso! Um email será enviado para notificação.');
+            // Resetar o estado do formulário depois do envio
+            setFormData({
+                idFuncionario: '',
+                dataViagem: '',
+                dataVoltaViagem: '',
+                cidade: '',
+                objetivo: '',
+                descricao: ''
+            });
+        } catch (error) {
+            console.error('Erro ao cadastrar viagem:', error);
+            alert('Falha ao cadastrar a viagem. Por favor, tente novamente mais tarde.');
+        }
     };
 
     return (

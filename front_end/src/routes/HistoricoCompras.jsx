@@ -12,7 +12,7 @@ const HistoricoCompras = () => {
     // Função para buscar dados da API
     const fetchPurchaseHistory = async () => {
       try {
-        const response = await rest.get('/listCompra'); // Usa a instância rest configurada
+        const response = await rest.get('/listComprasByUser'); // Usa a instância rest configurada
         console.log('Dados recebidos:', response.data); // Verifique se os dados estão sendo recebidos corretamente
         setPurchaseHistory(response.data);
       } catch (err) {

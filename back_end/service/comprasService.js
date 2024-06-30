@@ -33,6 +33,10 @@ const listAllCompras = async () => {
     return Despesas.findAll();
 };
 
+const listAllComprasByUser = async (id) => {
+    return Despesas.findAll({ where: { idFuncionario: id } });
+};
+
 const getByIdCompra = async (id) => {
     return Despesas.findById(id);
 };
@@ -74,5 +78,6 @@ module.exports = {
     listAllCompras,
     getByIdCompra,
     updateCompra,
-    removeCompra
+    removeCompra,
+    listAllComprasByUser
 };

@@ -1,9 +1,57 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Bar, Pie } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from 'chart.js';
 import '../dashboard.css';
 
+// Register the required components of Chart.js
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
+
 function HomeAdmin() {
+  // Data for Bar Chart
+  const barChartData = {
+    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+    datasets: [
+      {
+        label: 'Viagens',
+        data: [30, 45, 28, 60, 35],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  // Data for Pie Chart
+  const pieChartData = {
+    labels: ['Negócios', 'Lazer', 'Estudos', 'Outros'],
+    datasets: [
+      {
+        data: [55, 25, 15, 5],
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <>
       <header className="header">
@@ -17,28 +65,16 @@ function HomeAdmin() {
             <li>
               <Link to="#">Cadastros</Link>
               <ul>
-                <li><Link to="/cadastrarFuncionarioAdmin">Cadastrar Funcionário</Link></li>
+                <li><Link to="/cadastrarFuncionario">Cadastrar Funcionário</Link></li>
                 <li><Link to="/cadastrarViagemAdmin">Cadastrar Viagem</Link></li>
                 <li><Link to="/cadastrarDespesasAdmin">Cadastrar Despesas da Viagem</Link></li>
                 <li><Link to="/registroComprasAdmin">Registrar Compras da Viagem</Link></li>
-                <li><Link to="/manterCadastroAdmin">Manter Cadastro de Produtos</Link></li>
                 <li><Link to="/manterCadastroAdmin">Manter Cadastro de Produtos</Link></li>
                 <li><Link to="/listaViagemAdmin">Lista de viagem</Link></li>
                 <li><Link to="/listaDespesaAdmin">Lista de despesa</Link></li>
                 <li><Link to="/listaCompraAdmin">Lista de compra</Link></li>
                 <li><Link to="/listaProdutoAdmin">Lista de produto</Link></li>
                 <li><Link to="/listaFuncionarioAdmin">Lista de funcionario</Link></li>
-                {/* <li><Link to="/excluirFuncionarioAdmin"> Excluir funcionario</Link></li>
-                <li><Link to="/excluirProdutoAdmin"> Excluir produto</Link></li>
-                <li><Link to="/excluirCompraAdmin"> Excluir compra</Link></li>
-                <li><Link to="/excluirDespesaAdmin"> Excluir despesa</Link></li>
-                <li><Link to="/excluirViagemAdmin"> Excluir viagem</Link></li>
-                <li><Link to = "/excluirViagemAdmin"> Excluir viagem</Link></li>
-                <li><Link to="/atualizarFuncionarioAdmin"> Atualizar funcionario</Link></li>
-                <li><Link to="/atualizarProdutoAdmin"> Atualizar produto</Link></li>
-                <li><Link to="/atualizarCompraAdmin"> Atualizar compra</Link></li>
-                <li><Link to="/atualizarDespesaAdmin"> Atualizar despesa</Link></li> */}
-                
               </ul>
             </li>
             <li>
@@ -65,7 +101,15 @@ function HomeAdmin() {
             <h3>Despesas Totais</h3>
             <p>R$ 50.000</p>
           </div>
-          {/* Adicionar mais widgets conforme necessário */}
+          {/* Adicionar gráficos */}
+          <div className="chart-container">
+            <h3>Viagens por Mês</h3>
+            <Bar data={barChartData} />
+          </div>
+          <div className="chart-container">
+            <h3>Distribuição por Categoria</h3>
+            <Pie data={pieChartData} />
+          </div>
         </div>
         <div className="tasks">
           <h3>Atividades Recentes</h3>

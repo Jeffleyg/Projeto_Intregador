@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import rest from './api';  // Importa o módulo do axios que você configurou
 import '../buscaViagem.css';
 
-const BuscaViagem = () => {
+const BuscaViagemAdmin = () => {
     const [searchType, setSearchType] = useState('date');
     const [searchValue, setSearchValue] = useState('');
     const navigate = useNavigate(); // Hook para navegação
@@ -65,4 +65,4 @@ const BuscaViagem = () => {
     );
 };
 
-export default BuscaViagem;
+export default BuscaViagemAdmin;
