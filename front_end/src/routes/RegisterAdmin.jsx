@@ -22,7 +22,7 @@ const RegisterAdmin = () => {
 
     try {
       const response = await rest.post('registerAdmin', formData);
-      setSuccessMessage('Administrador registrado com sucesso!');
+      alert('Administrador registrado com sucesso!');
       setError('');
     } catch (error) {
       setError('Erro ao registrar administrador. Verifique os dados e tente novamente.');

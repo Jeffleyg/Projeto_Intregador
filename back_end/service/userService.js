@@ -97,13 +97,13 @@ const search = async (email) => {
 const loginUsuario = async ({ email, password }) => {
     const user = await Cadastro.findOne({where:{ email, password }});
 
-    const viagem = await CadastrarViagem.findOne({where : {email:email}});
+    const viagem = await CadastrarViagem.findOne({where : {email: email}});
 
-    const token = jwt.sign({ email: user.email, role: 'usuario' }, SECRET_KEY, { expiresIn: 3600 });
 
     if (!user) {
         throw new Error('Usuário não encontrado');
     }
+    return {user, viagem};
 };
 
 const loginAdmin = async ({ email, password }) => {
