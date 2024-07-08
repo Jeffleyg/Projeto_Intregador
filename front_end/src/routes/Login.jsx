@@ -1,24 +1,31 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style_login.css';
 import rest from './api';
 
 function Login({ onLoginSuccess }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const email = document.getElementById('emailForm').value;
-    const password = document.getElementById('passwordForm').value;
+    setLoading(true);
+    setError('');
 
     try {
       const response = await rest.post('/loginUsuario', { email, password });
       console.log('Login response:', response);
+      
       if (response.data.auth) {
-        onLoginSuccess(email);  // Passa o email do usuário logado
-        navigate('/home');
+        const authToken = response.data.token; // Supondo que o token venha na resposta
+        localStorage.setItem('token', authToken); // Armazena o token no localStorage
+        onLoginSuccess(email); // Passa o email do usuário logado
+        navigate('/home', { state: { token: authToken } }); // Navega para a página principal
       } else {
         alert('Invalid username or password!');
       }
@@ -26,10 +33,12 @@ function Login({ onLoginSuccess }) {
       console.error('Error during login:', error);
       if (error.response) {
         console.error('Error response data:', error.response.data);
-        alert(`Login error: ${error.response.data.erro || 'Please try again later.'}`);
+        setError(error.response.data.erro || 'Login error. Please try again later.');
       } else {
-        alert('An error occurred during login. Please try again later.');
+        setError('An error occurred during login. Please try again later.');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,11 +55,24 @@ function Login({ onLoginSuccess }) {
         <form className="login-card-form" id="loginForm" onSubmit={handleSubmit}>
           <div className="form-item">
             <span className="form-item-icon material-symbols-rounded">mail</span>
-            <input type="text" placeholder="Enter Email" id="emailForm" autoFocus required />
+            <input
+              type="text"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoFocus
+              required
+            />
           </div>
           <div className="form-item">
             <span className="form-item-icon material-symbols-rounded">lock</span>
-            <input type="password" placeholder="Enter Password" id="passwordForm" required />
+            <input
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
           <div className="form-item-other">
             <div className="checkbox">
@@ -59,10 +81,13 @@ function Login({ onLoginSuccess }) {
             </div>
             <a href="/forgotPassword">I forgot my password!</a>
           </div>
-          <button type="submit">Sign In</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Signing In...' : 'Sign In'}
+          </button>
+          {error && <p className="error-message">{error}</p>}
         </form>
         <div className="login-card-footer">
-          Você é administrador? <a href="/loginAdmin">Clique aqui!.</a>
+          Você é administrador? <a href="/loginAdmin">Clique aqui!</a>
         </div>
       </div>
       <div className="login-card-social">
