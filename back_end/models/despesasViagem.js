@@ -6,6 +6,14 @@ const DespesasViagem = sequelize.define('despesasviagem', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    emailFuncionario: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+            model: 'cadastros',
+            key: 'email'
+        }
+    },
     dataNota: {
         type: DataTypes.DATE,
         allowNull: false
@@ -28,26 +36,6 @@ const DespesasViagem = sequelize.define('despesasviagem', {
     },
     notaFiscal: {
         type: DataTypes.STRING, // Altere para STRING para armazenar o caminho ou URL do arquivo
-        allowNull: false
-    },
-    opcoesAlimentacao: {
-        type: DataTypes.JSON,
-        allowNull: true
-    },
-    tipoHospedagem: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    preferenciaEstadia: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    meioTransporte: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    especificarOutroTransporte: {
-        type: DataTypes.STRING,
         allowNull: true
     }
 }, {

@@ -4,24 +4,82 @@ const CadastroViagem = require('../models/cadastrarViagemModel');
 
 const registerDespesa = async (req, res) => {
     try {
-        const { dataNota, cidadeNota, tipoDespesa, valor, descricao, notaFiscal } = req.body;
+        const {
+            idViagem,
+            emailFuncionario,
+            dataNota,
+            cidadeNota,
+            tipoDespesa,
+            valor,
+            descricao
+        } = req.body;
+        
 
-        // // Verificar se req.user está definido
-        if (!req.user || !req.user.email) {
-            return res.status(400).json({ error: 'Usuário não autenticado' });
+        if (!idViagem || !emailFuncionario || !dataNota || !cidadeNota || !tipoDespesa || !valor || !descricao ) {
+            return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
         }
 
-        const despesaData = {
+        const viagem = await CadastroViagem.findOne({ where: { idViagem } });
+        if (!viagem) {
+            return res.status(400).json({ error: 'Viagem não encontrada' });
+        }
+
+        // const userViagem = await CadastroViagem.findOne({ where: { email: emailFuncionario }});
+        // if (!userViagem) {
+        //     return res.status(400).json({ error: 'Usuário não encontrado' });
+        // }
+
+        // Verifique se o email do funcionário corresponde ao email do usuário logado
+        // if (emailFuncionario !== req.user?.email) {
+        //     return res.status(403).json({ error: 'Usuário não autorizado' });
+        // }
+const notaFiscal = req.file ? req.file.filename : null; 
+        const data = {
+            idViagem,
+            emailFuncionario,
             dataNota,
             cidadeNota,
             tipoDespesa,
             valor,
             descricao,
-            notaFiscal,
-            emailUsuario: req.user.email
+            notaFiscal
         };
 
-        const despesaRegistrada = await despesasService.registerDespesa(despesaData);
+        const despesaRegistrada = await despesasService.registerDespesa(data);
+
+        // Envio de email de lembrete
+        const dataLembrete = new Date(dataNota);
+        dataLembrete.setDate(dataLembrete.getDate() - 1);
+
+        const mailOptions = {
+            from: 'jeffleygarcon007@gmail.com',
+            to: emailFuncionario, // Substituir pelo email do destinatário
+            subject: 'Lembrete de Despesa',
+            text: `
+            Olá,
+        
+            Este é um lembrete sobre a seguinte despesa que está prestes a vencer:
+        
+            - **Descrição da Despesa:** ${req.body.descricao}
+            - **Data de Vencimento:** ${req.body.dataDeVencimento}
+            - **Valor:** R$${req.body.valor}
+        
+            Por favor, certifique-se de que esta despesa seja registrada e paga a tempo para evitar possíveis problemas.
+        
+            Se você tiver alguma dúvida ou precisar de mais informações, entre em contato conosco.
+        
+            Atenciosamente,
+            FeliShop / Pierre Felix
+            `
+        };
+        
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Erro ao enviar email:', error);
+            } else {
+                console.log('Email enviado com sucesso:', info.response);
+            }
+        });
 
         res.status(201).json({ message: 'Despesa cadastrada com sucesso', despesa: despesaRegistrada });
     } catch (error) {
@@ -43,7 +101,7 @@ const listAllDespesas = async (req, res, next) => {
 
 const listAllDespesasByUser = async (req, res, next) => {
     try {
-        const email = req.user?.email; // Obtém o ID do funcionário a partir do usuário autenticado
+        const email = req.user?.emailFuncionario; // Obtém o email do funcionário a partir do usuário autenticado
 
         if (!email) {
             return res.status(400).json({ error: 'email do funcionário não encontrado' });
@@ -90,8 +148,8 @@ const updateDespesa = async (req, res, next) => {
 
 const deleteDespesa = async (req, res, next) => {
     try {
-        const { email } = req.params;
-        await despesasService.removeDespesa(email);
+        const { id } = req.params;
+        await despesasService.removeDespesa(id);
         res.status(200).json({ message: 'Despesa deletada com sucesso' });
     } catch (error) {
         console.error('Erro ao deletar despesa:', error);
