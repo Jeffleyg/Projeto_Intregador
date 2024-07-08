@@ -3,9 +3,19 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database');
 
 const CadastrarViagem = sequelize.define('cadastrarviagem', {
-  idFuncionario: {
-    type: DataTypes.STRING,
+  idViagem: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
     allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    references: {
+      model: 'cadastros',
+      key: 'email'
+    } 
   },
   dataDeIda: {
     type: DataTypes.DATE,
@@ -30,19 +40,7 @@ const CadastrarViagem = sequelize.define('cadastrarviagem', {
 }, {
   tableName: 'cadastrarviagem',
   timestamps: false,
-  hooks: {
-    beforeCreate: (user) => {
-
-        user.idFuncionario = generateEmployeeId(); // função para gerar o employeeId
-    }
-}
 });
-
-// Função para gerar um employeeId único
-function generateEmployeeId() {
-// Lógica para gerar o employeeId, por exemplo, um UUID, ou baseado em timestamp, etc.
-return 'EMP-' + Math.random().toString(36).substr(2, 9); // Exemplo simples
-}
 
  
 module.exports = CadastrarViagem;

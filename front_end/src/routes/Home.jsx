@@ -65,25 +65,20 @@ function Home() {
             <li>
               <Link to="#">Cadastros</Link>
               <ul>
-                <li><Link to="/cadastrarFuncionario">Cadastrar Funcionário</Link></li>
-                <li><Link to="/cadastrarViagemAdmin">Cadastrar Viagem</Link></li>
+                
                 <li><Link to="/cadastrarDespesasAdmin">Cadastrar Despesas da Viagem</Link></li>
                 <li><Link to="/registroComprasAdmin">Registrar Compras da Viagem</Link></li>
                 <li><Link to="/manterCadastroAdmin">Manter Cadastro de Produtos</Link></li>
-                <li><Link to="/listaViagemAdmin">Lista de viagem</Link></li>
-                <li><Link to="/listaDespesaAdmin">Lista de despesa</Link></li>
-                <li><Link to="/listaCompraAdmin">Lista de compra</Link></li>
-                <li><Link to="/listaProdutoAdmin">Lista de produto</Link></li>
-                <li><Link to="/listaFuncionarioAdmin">Lista de funcionario</Link></li>
+                
               </ul>
             </li>
             <li>
               <Link to="#">Visualizações</Link>
               <ul>
-                <li><Link to="/HistoricoViagensAdmin"> Histórico das Viagens</Link></li>
-                <li><Link to="/HistoricoDespesasAdmin"> Histórico das Despesas de uma Viagem</Link></li>
-                <li><Link to="/HistoricoComprasAdmin"> Histórico de Compras de uma Viagem</Link></li>
-                <li><Link to="/buscaViagemAdmin">Buscar Viagem</Link></li>
+                <li><Link to="/HistoricoViagens"> Histórico das Viagens</Link></li>
+                <li><Link to="/HistoricoDespesas"> Histórico das Despesas de uma Viagem</Link></li>
+                <li><Link to="/HistoricoCompras"> Histórico de Compras de uma Viagem</Link></li>
+                <li><Link to="/buscaViagem">Buscar Viagem</Link></li>
               </ul>
             </li>
             <li><Link to="/">Sair</Link></li>

@@ -3,6 +3,7 @@ const router = express.Router();
 const despesasController = require('../controllers/registroComprasController');
 const authenticateJWT = require('../middlewares/authenticateJWT');
 const { route } = require('./tripRoutes');
+const upload = require('../upload');
 
 router.post('/registerCompra',authenticateJWT, despesasController.registerCompra);
 router.get('/listCompra', despesasController.listCompras);

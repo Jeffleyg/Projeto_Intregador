@@ -40,25 +40,14 @@ const Cadastro = sequelize.define('cadastros', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    employeeId: {
+    role: {
         type: DataTypes.STRING,
-        allowNull: false
-    }
+        defaultValue: 'usuario'
+    },
 }, {
     tableName: 'cadastros',
     timestamps: false,
-    hooks: {
-        beforeCreate: (user) => {
-            // Aqui você pode gerar um employeeId único automaticamente
-            user.employeeId = generateEmployeeId(); // função para gerar o employeeId
-        }
-    }
 });
 
-// Função para gerar um employeeId único
-function generateEmployeeId() {
-    // Lógica para gerar o employeeId, por exemplo, um UUID, ou baseado em timestamp, etc.
-    return 'EMP-' + Math.random().toString(36).substr(2, 9); // Exemplo simples
-}
 
 module.exports = Cadastro;

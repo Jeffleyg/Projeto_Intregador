@@ -7,7 +7,6 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
 router.post('/registerUsuario', userController.registerUsuario);
 router.post('/registerAdmin', userController.registerAdmin);
 router.get('/listUsuario', authenticateJWT, userController.listUsuarios);
-router.get('/listUsuario/:id', authenticateJWT, userController.getUsuarioById);
 router.put('/updateUsuario/:id', authenticateJWT, userController.updateUsuario);
 router.delete('/deleteUsuario/:id',authenticateJWT, userController.deleteUsuario);
 router.get('/searchUsuario', authenticateJWT, userController.searchUsuario);

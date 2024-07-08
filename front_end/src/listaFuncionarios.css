@@ -1,0 +1,31 @@
+/* No CSS de histórico de viagens, copiado para o novo CSS */
+#user-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  #user-list th,
+  #user-list td {
+    padding: 12px 15px;
+  }
+  
+  #user-list thead {
+    background-color: #f4f4f4;
+  }
+  
+  #user-list th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  #user-list tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  #user-list tr:hover {
+    background-color: #ddd;
+  }
+  

@@ -1,23 +1,30 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import rest from './api';
 import '../historico_viagens.css';
 
-const HistoricoViagens = () => {
+const HistoricoViagens = ({ userEmail }) => {
   const [tripHistory, setTripHistory] = useState([]);
 
   useEffect(() => {
     const fetchTripHistory = async () => {
+      if (!userEmail) {
+        console.warn('Nenhum email de usuário fornecido');
+        return;
+      }
+
       try {
-        const response = await rest.get('/listViagensByUser');
-        setTripHistory(response.data.trips); // Certifique-se de que 'trips' é o campo que a API retorna
+        const response = await rest.get(`/listViagemByUser/${userEmail}`);
+        console.log('Dados recebidos da API:', response.data); // Adicionado para depuração
+        setTripHistory(response.data.trips || []);
       } catch (error) {
         console.error('Erro ao buscar histórico de viagens:', error);
       }
     };
 
     fetchTripHistory();
-  }, []);
+  }, [userEmail]);
 
   return (
     <div>
@@ -39,7 +46,7 @@ const HistoricoViagens = () => {
         <thead>
           <tr>
             <th>Código da Viagem</th>
-            <th>ID do Funcionário</th>
+            <th>Email do Funcionário</th>
             <th>Destino</th>
             <th>Data de Início</th>
             <th>Data de Fim</th>
@@ -47,16 +54,22 @@ const HistoricoViagens = () => {
           </tr>
         </thead>
         <tbody>
-          {tripHistory.map((trip, index) => (
-            <tr key={index}>
-              <td>{trip.id}</td>
-              <td>{trip.idFuncionario}</td>
-              <td>{trip.cidade}</td>
-              <td>{trip.dataDeIda}</td>
-              <td>{trip.dataDeVolta}</td>
-              <td>{trip.objetivo}</td>
+          {tripHistory.length > 0 ? (
+            tripHistory.map((trip, index) => (
+              <tr key={index}>
+                <td>{trip.idViagem}</td>
+                <td>{trip.email}</td>
+                <td>{trip.cidade}</td>
+                <td>{trip.dataDeIda}</td>
+                <td>{trip.dataDeVolta}</td>
+                <td>{trip.objetivo}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="6">Nenhuma viagem encontrada</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

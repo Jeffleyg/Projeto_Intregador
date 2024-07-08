@@ -30,7 +30,22 @@ const getViagemById = async (req, res, next) => {
 
 const updateViagem = async (req, res, next) => {
     try {
-        const [rowsUpdated, [updatedTrip]] = await tripService.updateViagem(req.params.id, req.body);
+        const { descricao, valor, dataDeIda } = req.body;
+
+        if (!req.user) {
+            return res.status(400).json({ error: 'Usuário não autenticado' });
+        }
+
+        if (!descricao || !dataDeIda || !valor) {
+            return res.status(400).json({ error: 'Dados incompletos' });
+        }
+
+        const [rowsUpdated, [updatedTrip]] = await tripService.updateViagem(
+            req.params.idViagem,
+            req.body,
+            req.user.email
+        );
+
         res.status(200).json({ trip: updatedTrip });
     } catch (error) {
         next(error);
@@ -39,7 +54,7 @@ const updateViagem = async (req, res, next) => {
 
 const deleteViagem = async (req, res, next) => {
     try {
-        await tripService.removeViagem(req.params.id);
+        await tripService.removeViagem(req.params.idViagem);
         res.status(200).json({ message: 'Deletado com sucesso' });
     } catch (error) {
         next(error);
@@ -63,7 +78,7 @@ const searchViagem = async (req, res, next) => {
 
 const listViagensByUser = async (req, res, next) => {
     try {
-        const trips = await tripService.listViagensByUser(req.params.id);
+        const trips = await tripService.listViagensByUser(req.params.email);
         res.status(200).json({ trips });
     } catch (error) {
         next(error);
@@ -79,6 +94,14 @@ const listViagensByDate = async (req, res, next) => {
     }
 };
 
+const editaViagem = async (req, res, next) => {
+    try {
+        const trip = await tripService.editaViagem(req.params.idViagem, req.body);
+        res.status(200).json({ trip });
+    } catch (error) {
+        next(error);
+    }
+};
 module.exports = {
     registerViagem,
     listViagens,
@@ -87,5 +110,6 @@ module.exports = {
     deleteViagem,
     searchViagem,
     listViagensByUser,
-    listViagensByDate
+    listViagensByDate,
+    editaViagem
 };

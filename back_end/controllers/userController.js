@@ -9,9 +9,12 @@ const transporter = require('../utils/mailer');
 
 const registerUsuario = async (req, res, next) => {
     try {
-        const { firstName, lastName, cpf, email, dateOfBirth, zipCode, address, phoneNumber, password, confirmPassword } = req.body;   
-        const user = await userServices.register(req.body);
-        res.status(201).json({ user });
+        const { firstName, lastName, cpf, email, dateOfBirth, zipCode, address, phoneNumber, password, confirmPassword } = req.body;  
+        const userData = { firstName, lastName, cpf, email, dateOfBirth, zipCode, address, phoneNumber, password, confirmPassword, role: 'usuario' };
+ 
+        const user = await userServices.register(userData);
+        const token = jwt.sign({ email: user.email, role: 'usuario' },  SECRET_KEY, { expiresIn: 3600 });
+        res.status(201).json({ user, token });
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error);
         next(error);
@@ -22,8 +25,9 @@ const registerAdmin = async (req, res, next) => {
     try {
         const { firstName, lastName, email, password } = req.body;
         const adminData = { firstName, lastName, email, password, role: 'admin' };
+        const token = jwt.sign({ email: adminData.email, role: 'admin' }, SECRET_KEY, { expiresIn: 3600 });
         const admin = await userServices.registerAdmin(adminData);
-        res.status(201).json({ admin });
+        res.status(201).json({ admin, token });
     } catch (error) {
         console.error('Erro ao cadastrar administrador:', error);
         next(error);
@@ -40,15 +44,6 @@ const listUsuarios = async (req, res, next) => {
     }
 };
 
-const getUsuarioById = async (req, res, next) => {
-    try {
-        const user = await userServices.getUsuarioById(req.params.id);
-        res.status(200).json({ user });
-    } catch (error) {
-        console.error('Erro ao listar usuário por ID:', error);
-        next(error);
-    }
-};
 
 const updateUsuario = async (req, res, next) => {
     try {
@@ -62,7 +57,7 @@ const updateUsuario = async (req, res, next) => {
 
 const deleteUsuario = async (req, res, next) => {
     try {
-        await userServices.remove(req.params.id);
+        await userServices.remove(req.params.email);
         res.status(200).json({ message: 'Deletado com sucesso' });
     } catch (error) {
         console.error('Erro ao deletar usuário:', error);
@@ -72,8 +67,8 @@ const deleteUsuario = async (req, res, next) => {
 
 const searchUsuario = async (req, res, next) => {
     try {
-        const { firstName } = req.query;
-        const users = await userServices.search(firstName);
+        const { email } = req.query;
+        const users = await userServices.search(email);
         res.status(200).json({ users });
     } catch (error) {
         console.error('Erro ao buscar usuário:', error);
@@ -170,7 +165,7 @@ const getUsuarioProfile = async (req, res, next) => {
 const updateUsuarioProfile = async (req, res, next) => {
     try {
       const { firstName, lastName, email, phoneNumber, password, notifications } = req.body;
-      const userId = req.userModel.id; // Supondo que o ID do usuário autenticado está disponível em req.user.id
+      const userByEmail = req.userModel.email; // Supondo que o ID do usuário autenticado está disponível em req.user.id
   
       // Verifique se todos os campos necessários estão presentes e válidos
       if (!firstName || !lastName || !email || !phoneNumber) {
@@ -178,7 +173,7 @@ const updateUsuarioProfile = async (req, res, next) => {
       }
   
       const updatedUser = await User.findByIdAndUpdate(
-        userId,
+        userByEmail,
         {
           firstName,
           lastName,
@@ -206,7 +201,6 @@ module.exports = {
     registerUsuario,
     registerAdmin,
     listUsuarios,
-    getUsuarioById,
     updateUsuario,
     deleteUsuario,
     searchUsuario,
