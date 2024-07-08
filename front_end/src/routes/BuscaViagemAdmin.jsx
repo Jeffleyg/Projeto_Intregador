@@ -27,7 +27,7 @@ const BuscaViagemAdmin = () => {
             });
             console.log('Resposta recebida:', response.data);
             // Navegar para a página de exibição de viagens com os dados da busca
-            navigate('/viagemAdmin', { state: { viagens: response.data } });
+            navigate('/viagemAdmin', { state: { viagens: response.data.trips } }); // Corrigido para 'trips'
         } catch (error) {
             console.error('Erro ao buscar viagens:', error);
             if (error.response) {
