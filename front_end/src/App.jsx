@@ -33,6 +33,7 @@ import ViagemContainerAdmin from './routes/ViagemContainerAdmin';
 import PerfilAdmin from './routes/PerfilAdmin';
 import HeaderRoutes from './routes/HeaderRoutes';
 import ListaFuncionarios from './routes/ListaFuncionarios';
+import RegisterAdmin from './routes/RegisterAdmin';
 
 function App() {
   const [userEmail, setUserEmail] = useState('');
@@ -77,6 +78,7 @@ function App() {
         <Route path="/perfilAdmin" element={<PerfilAdmin />} />
         <Route path="/headerRoutes" element={<HeaderRoutes />} />
         <Route path="/listaFuncionario" element={<ListaFuncionarios />} />
+        <Route path="/registerAdmin" element={<RegisterAdmin />} />
       </Routes>
     </Router>
   );

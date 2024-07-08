@@ -19,7 +19,7 @@ const register = async (data) => {
         from: 'jeffleygarcon007@gmail.com',
         to: data.email,
         subject: 'Cadastro de Usuário',
-        text: ` olá, ${data.firstName} ${data.lastName} \n Seu cadastro foi realizado com sucesso!`
+        text: ` olá, ${data.firstName} ${data.lastName} \n Seu cadastro foi realizado com sucesso! \n seu password é ${data.password}`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -60,7 +60,7 @@ const registerAdmin = async (data) => {
         from: 'jeffleygarcon007@gmail.com',
         to: data.email,
         subject: 'Cadastro de Administrador',
-        text: `Olá, ${data.firstName} ${data.lastName} \n Seu cadastro como administrador foi realizado com sucesso!`
+        text: `Olá, ${data.firstName} ${data.lastName} \n Seu cadastro como administrador foi realizado com sucesso! \n seu password é ${data.password}`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
