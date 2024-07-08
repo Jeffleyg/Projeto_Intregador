@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import rest from './api'; // Ajuste o caminho conforme a localização do arquivo de configuração do axios
 import '../historico_compras.css';
 
-const HistoricoCompras = () => {
+const HistoricoComprasAdmin = () => {
   const [purchaseHistory, setPurchaseHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -46,7 +46,7 @@ const HistoricoCompras = () => {
         <thead>
           <tr>
             <th>Código da Viagem</th>
-            <th>ID do Funcionário</th>
+            <th>Email do Funcionário</th>
             <th>Data da Compra</th>
             <th>Local</th>
             <th>Tipo de Despesa</th>
@@ -59,8 +59,8 @@ const HistoricoCompras = () => {
           {purchaseHistory.length > 0 ? (
             purchaseHistory.map((purchase, index) => (
               <tr key={index}>
-                <td>{purchase.codigoViagem}</td>
-                <td>{purchase.idFuncionario}</td>
+                <td>{purchase.idViagem}</td>
+                <td>{purchase.emailFuncionario}</td>
                 <td>{purchase.dataCompra}</td>
                 <td>{purchase.local}</td>
                 <td>{purchase.tipoDespesa}</td>
@@ -80,4 +80,4 @@ const HistoricoCompras = () => {
   );
 };
 
-export default HistoricoCompras;
+export default HistoricoComprasAdmin;
