@@ -19,6 +19,15 @@ const HistoricoDespesasAdmin = () => {
     fetchExpenseHistory();
   }, []);
 
+  const handleRemove = async (id) => {
+    try {
+      await rest.delete(`/deleteDespesa/${id}`);
+      setExpenseHistory(expenseHistory.filter(expense => expense.id !== id));
+    } catch (error) {
+      console.error('Erro ao remover despesa:', error);
+    }
+  };
+
   return (
     <div>
       <header className="header">
@@ -31,26 +40,30 @@ const HistoricoDespesasAdmin = () => {
         <thead>
           <tr>
             <th>Código da Viagem</th>
-            <th>ID do Funcionário</th>
+            <th>Email do Funcionário</th>
             <th>Data da Nota Fiscal/Recibo</th>
             <th>Cidade da Nota Fiscal/Recibo</th>
             <th>Tipo de Despesa</th>
             <th>Valor Pago</th>
             <th>Descrição</th>
             <th>Nota Fiscal/Recibo</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           {expenseHistory.map((expense, index) => (
             <tr key={index}>
-              <td>{expense.tripCode}</td>
-              <td>{expense.employeeId}</td>
-              <td>{expense.receiptDate}</td>
-              <td>{expense.receiptCity}</td>
-              <td>{expense.expenseType}</td>
-              <td>{expense.amountPaid}</td>
-              <td>{expense.description}</td>
-              <td><a href={`path/to/receipts/${expense.receipt}`} target="_blank" rel="noopener noreferrer">{expense.receipt}</a></td>
+              <td>{expense.idViagem}</td>
+              <td>{expense.emailFuncionario}</td>
+              <td>{expense.dataNota}</td>
+              <td>{expense.cidadeNota}</td>
+              <td>{expense.tipoDespesa}</td>
+              <td>{expense.valor}</td>
+              <td>{expense.descricao}</td>
+              <td><a href={`path/to/receipts/${expense.notafiscal}`} target="_blank" rel="noopener noreferrer">{expense.receipt}</a></td>
+              <td>
+                <button onClick={() => handleRemove(expense.id)}>Remover</button>
+              </td>
             </tr>
           ))}
         </tbody>

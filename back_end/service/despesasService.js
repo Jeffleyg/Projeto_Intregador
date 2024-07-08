@@ -3,69 +3,14 @@ const transporter = require('../utils/mailer');
 
 const registerDespesa = async (data) => {
     try {
-        const { emailUsuario, dataNota, cidadeNota, tipoDespesa, valor, descricao, notaFiscal } = data;
+        console.log('Dados recebidos para cadastro:', data); // Log dos dados
 
-        // Verificar se todos os campos obrigatórios estão presentes
-        if (!emailUsuario || !dataNota || !cidadeNota || !tipoDespesa || !valor || !descricao || !notaFiscal) {
-            throw new Error('Todos os campos são obrigatórios');
-        }
+        const despesa = await DespesasViagem.create(data);
 
-        // Verificar se o usuário tem uma viagem ativa associada ao seu email
-        const viagem = await CadastroViagem.findOne({ where: { email: emailUsuario } });
-
-        if (!viagem) {
-            throw new Error('Nenhuma viagem ativa encontrada para este usuário');
-        }
-
-        const despesaData = {
-            dataNota,
-            cidadeNota,
-            tipoDespesa,
-            valor,
-            descricao,
-            notaFiscal,
-            idViagem: viagem.id // Adicionar a referência à viagem
-        };
-
-        const despesa = await DespesasViagem.create(despesaData);
-
-        // Envio de email de lembrete
-        const dataLembrete = new Date(dataNota);
-        dataLembrete.setDate(dataLembrete.getDate() - 1);
-
-        const mailOptions = {
-            from: 'jeffleygarcon007@gmail.com',
-            to: emailUsuario, // Substituir pelo email do destinatário
-            subject: 'Lembrete de Despesa',
-            text: `
-            Olá,
-        
-            Este é um lembrete sobre a seguinte despesa que está prestes a vencer:
-        
-            - **Descrição da Despesa:** ${descricao}
-            - **Data de Vencimento:** ${dataNota}
-            - **Valor:** R$${valor}
-        
-            Por favor, certifique-se de que esta despesa seja registrada e paga a tempo para evitar possíveis problemas.
-        
-            Se você tiver alguma dúvida ou precisar de mais informações, entre em contato conosco.
-        
-            Atenciosamente,
-            [Sua Empresa/Seu Nome]
-            `
-        };
-        
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Erro ao enviar email:', error);
-            } else {
-                console.log('Email enviado com sucesso:', info.response);
-            }
-        });
-
+        console.log( despesa); // Log do resultado
         return despesa;
     } catch (error) {
-        console.error('Erro ao cadastrar despesa no banco de dados:', error.message);
+        console.error('Erro ao cadastrar despesa no banco de dados:', error.message); // Log do erro
         throw new Error('Erro ao cadastrar despesa no banco de dados');
     }
 };
@@ -80,9 +25,9 @@ const listAllDespesas = async () => {
     }
 };
 
-const listAllDespesasByUser = async (id) => {
+const listAllDespesasByUser = async (email) => {
     try {
-        const despesas = await DespesasViagem.findAll({ where: { email : email } });
+        const despesas = await DespesasViagem.findByPk({ where: { email : email } });
         return despesas;
     } catch (error) {
         throw new Error('Erro ao listar despesas no banco de dados');
@@ -113,9 +58,9 @@ const updateDespesa = async (email, data) => {
     }
 };
 
-const removeDespesa = async (email) => {
+const removeDespesa = async (id) => {
     try {
-        const despesa = await DespesasViagem.findByPk(email);
+        const despesa = await DespesasViagem.findByPk(id);
         if (!despesa) {
             throw new Error('Despesa não encontrada');
         }
