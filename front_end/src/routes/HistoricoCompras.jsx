@@ -12,7 +12,7 @@ const HistoricoCompras = () => {
     // Função para buscar dados da API
     const fetchPurchaseHistory = async () => {
       try {
-        const response = await rest.get('/listComprasByUser'); // Usa a instância rest configurada
+        const response = await rest.get('/listCompra'); // Usa a instância rest configurada
         console.log('Dados recebidos:', response.data); // Verifique se os dados estão sendo recebidos corretamente
         setPurchaseHistory(response.data);
       } catch (err) {
@@ -40,20 +40,13 @@ const HistoricoCompras = () => {
         <div className="logo">
           <img src="logoFelishop.jpg" alt="FelisShop Logo" />
         </div>
-        <nav>
-          <ul className="menu-items">
-            <li><Link to="/registroCompras">Registro de Compras da viagem</Link></li>
-            <li><Link to="/dashboard">Voltar ao Dashboard</Link></li>
-            <li><Link to="/ajuda">Ajuda</Link></li>
-          </ul>
-        </nav>
       </header>
       <h1>Histórico de Compras de Viagem</h1>
       <table id="purchase-history">
         <thead>
           <tr>
             <th>Código da Viagem</th>
-            <th>ID do Funcionário</th>
+            <th>Email do Funcionário</th>
             <th>Data da Compra</th>
             <th>Local</th>
             <th>Tipo de Despesa</th>
@@ -66,8 +59,8 @@ const HistoricoCompras = () => {
           {purchaseHistory.length > 0 ? (
             purchaseHistory.map((purchase, index) => (
               <tr key={index}>
-                <td>{purchase.codigoViagem}</td>
-                <td>{purchase.idFuncionario}</td>
+                <td>{purchase.idViagem}</td>
+                <td>{purchase.emailFuncionario}</td>
                 <td>{purchase.dataCompra}</td>
                 <td>{purchase.local}</td>
                 <td>{purchase.tipoDespesa}</td>
