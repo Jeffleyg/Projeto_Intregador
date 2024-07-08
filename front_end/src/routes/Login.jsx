@@ -6,20 +6,19 @@ import '../style_login.css';
 import rest from './api';
 
 function Login({ onLoginSuccess }) {
-
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = document.getElementById('emailForm').value;
     const password = document.getElementById('passwordForm').value;
-    
+
     try {
       const response = await rest.post('/loginUsuario', { email, password });
       console.log('Login response:', response);
       if (response.data.auth) {
-        onLoginSuccess();
-        navigate('/home'); // Redireciona para a página "home"
+        onLoginSuccess(email);  // Passa o email do usuário logado
+        navigate('/home');
       } else {
         alert('Invalid username or password!');
       }
@@ -63,7 +62,7 @@ function Login({ onLoginSuccess }) {
           <button type="submit">Sign In</button>
         </form>
         <div className="login-card-footer">
-          Você é adiminstrador? <a href="/loginAdmin">Clique aqui!.</a>
+          Você é administrador? <a href="/loginAdmin">Clique aqui!.</a>
         </div>
       </div>
       <div className="login-card-social">

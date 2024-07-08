@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './routes/Login';
 import Home from './routes/Home';
@@ -33,13 +32,19 @@ import ForgotPasswordAdmin from './routes/ForgotPasswordAdmin';
 import ViagemContainerAdmin from './routes/ViagemContainerAdmin';
 import PerfilAdmin from './routes/PerfilAdmin';
 import HeaderRoutes from './routes/HeaderRoutes';
-
+import ListaFuncionarios from './routes/ListaFuncionarios';
 
 function App() {
+  const [userEmail, setUserEmail] = useState('');
+
+  const handleLoginSuccess = (email) => {
+    setUserEmail(email);
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login onLoginSuccess={() => {}} />} />
+        <Route path="/" element={<Login onLoginSuccess={handleLoginSuccess} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/cadastrarFuncionario" element={<CreateEmployeeAccount />} />
@@ -49,7 +54,7 @@ function App() {
         <Route path="/registroCompras" element={<RegistroCompras />} />
         <Route path="/historicoCompras" element={<HistoricoCompras />} />
         <Route path="/historicoDespesas" element={<HistoricoDespesas />} />
-        <Route path="/historicoViagens" element={<HistoricoViagens />} />
+        <Route path="/historicoViagens" element={<HistoricoViagens userEmail={userEmail} />} />
         <Route path="/manterCadastro" element={<ManterCadastroCompras />} />
         <Route path="/cadastrarViagem" element={<CadastraViagem />} />
         <Route path="/buscaViagem" element={<BuscaViagem />} />
@@ -57,8 +62,6 @@ function App() {
         <Route path="/loginAdmin" element={<LoginAdmin />} />
         <Route path="/homeAdmin" element={<HomeAdmin />} />
         <Route path="/viagem" element={<ViagemContainer />} />
-        <Route path="/loginAdmin" element={<LoginAdmin />} />
-        <Route path="/homeAdmin" element={<HomeAdmin />} />
         <Route path="/cadastrarDespesasAdmin" element={<CadastrarDespesasAdmin />} />
         <Route path="/configuracoesAdmin" element={<SettingsAdmin />} />
         <Route path="/ajudaAdmin" element={<AjudaAdmin />} />
@@ -73,7 +76,7 @@ function App() {
         <Route path="/viagemAdmin" element={<ViagemContainerAdmin />} />
         <Route path="/perfilAdmin" element={<PerfilAdmin />} />
         <Route path="/headerRoutes" element={<HeaderRoutes />} />
-
+        <Route path="/listaFuncionario" element={<ListaFuncionarios />} />
       </Routes>
     </Router>
   );

@@ -2,8 +2,10 @@
 /* eslint-disable no-undef */
 const Cadastro = require('../models/cadastrarModel');
 const CadastroAdmin = require('../models/cadastrarAdmin');
+const CadastrarViagem = require('../models/cadastrarViagemModel');
 const transporter = require('../utils/mailer');
-
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = 'Jeffley2024';
 
 const register = async (data) => {
     const { password, confirmPassword } = data;
@@ -12,15 +14,12 @@ const register = async (data) => {
         throw new Error('Senhas não coincidem');
     }
 
-    const employeeId = generateEmployeeId();
-
-    const userDataWithEmployeeId = { ...data, employeeId };
 
     const mailOptions = {
         from: 'jeffleygarcon007@gmail.com',
         to: data.email,
         subject: 'Cadastro de Usuário',
-        text: ` olá, ${data.firstName} ${data.lastName} \n Seu cadastro foi realizado com sucesso! \n Seu ID de funcionário é: ${employeeId}`
+        text: ` olá, ${data.firstName} ${data.lastName} \n Seu cadastro foi realizado com sucesso!`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -31,12 +30,9 @@ const register = async (data) => {
         }
     });
 
-    return Cadastro.create(userDataWithEmployeeId);
+    return Cadastro.create(data);
 };
 
-const generateEmployeeId = () => {
-    return Math.random().toString(36).substring(2, 10); // Gera um ID aleatório para exemplo
-};
 
 const findByCPFOrEmail = async (cpf, email) => {
     const userByCPF = await Cadastro.findOne({ cpf });
@@ -49,36 +45,65 @@ const findByCPFOrEmail = async (cpf, email) => {
     return false; // Retorna false se não encontrar nenhum usuário
 };
 
+
 const registerAdmin = async (data) => {
-    return CadastroAdmin.create(data);
+
+    const existingAdmin = await CadastroAdmin.findOne({ where: { email: data.email } });
+
+    if (existingAdmin) {
+        throw new Error('Email já cadastrado');
+    }
+    
+    const admin = await CadastroAdmin.create(data);
+
+    const mailOptions = {
+        from: 'jeffleygarcon007@gmail.com',
+        to: data.email,
+        subject: 'Cadastro de Administrador',
+        text: `Olá, ${data.firstName} ${data.lastName} \n Seu cadastro como administrador foi realizado com sucesso!`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Erro ao enviar email:', error);
+        } else {
+            console.log('Email enviado:', info.response);
+        }
+    });
+
+    return admin;
 };
 
 const listAll = async () => {
-    return Cadastro.find();
+    return Cadastro.findAll();
 };
 
-const getById = async (id) => {
-    return Cadastro.findById(id);
+
+
+const update = async (email, data) => {
+    return Cadastro.update(data, { where: { email } });
 };
 
-const update = async (id, data) => {
-    return Cadastro.findByIdAndUpdate(id, data, { new: true });
+const remove = async (email) => {
+    return Cadastro.destroy({ where: { email } });
 };
 
-const remove = async (id) => {
-    return Cadastro.findByIdAndDelete(id);
+const search = async (email) => {
+    return Cadastro.findOne({ where: { email } });
 };
 
-const search = async (firstName) => {
-    return Cadastro.find({ firstName });
-};
+
 
 const loginUsuario = async ({ email, password }) => {
     const user = await Cadastro.findOne({where:{ email, password }});
+
+    const viagem = await CadastrarViagem.findOne({where : {email:email}});
+
+    const token = jwt.sign({ email: user.email, role: 'usuario' }, SECRET_KEY, { expiresIn: 3600 });
+
     if (!user) {
         throw new Error('Usuário não encontrado');
     }
-    return user;
 };
 
 const loginAdmin = async ({ email, password }) => {
@@ -88,7 +113,6 @@ const loginAdmin = async ({ email, password }) => {
     }
     return user;
 };
-
 
 
 const forgotPassword = async (email) => {
@@ -143,7 +167,6 @@ module.exports = {
     register,
     registerAdmin,
     listAll,
-    getById,
     update,
     remove,
     search,

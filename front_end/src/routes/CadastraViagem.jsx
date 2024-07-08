@@ -3,14 +3,15 @@ import '../cadastraViagem.css';
 import rest from './api'; // Ajuste o caminho conforme necessário
 
 const CadastraViagem = () => {
-    // State para armazenar os dados do formulário
     const [formData, setFormData] = useState({
-        idFuncionario: '',
-        dataViagem: '',
-        dataVoltaViagem: '',
+        idViagem: '',
+        dataDeIda: '',
+        dataDeVolta: '',
         cidade: '',
         objetivo: '',
-        descricao: ''
+        descricao: '',
+        emailUsuario: '',
+        emailAdmin: ''
     });
 
     const handleChange = (e) => {
@@ -24,21 +25,26 @@ const CadastraViagem = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Enviar os dados para a API
             const response = await rest.post('/registerViagem', formData);
             console.log('Viagem cadastrada:', response.data);
             alert('Viagem cadastrada com sucesso! Um email será enviado para notificação.');
-            // Resetar o estado do formulário depois do envio
             setFormData({
-                idFuncionario: '',
-                dataViagem: '',
-                dataVoltaViagem: '',
+                idViagem: '',
+                dataDeIda: '',
+                dataDeVolta: '',
                 cidade: '',
                 objetivo: '',
-                descricao: ''
+                descricao: '',
+                emailUsuario: '',
+                emailAdmin: ''
             });
         } catch (error) {
             console.error('Erro ao cadastrar viagem:', error);
+            if (error.response) {
+                console.error('Dados do erro:', error.response.data);
+                console.error('Status do erro:', error.response.status);
+                console.error('Cabeçalhos do erro:', error.response.headers);
+            }
             alert('Falha ao cadastrar a viagem. Por favor, tente novamente mais tarde.');
         }
     };
@@ -48,16 +54,16 @@ const CadastraViagem = () => {
             <h2>Cadastro de Viagem</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="idFuncionario">ID do Funcionário:</label>
-                    <input type="text" id="idFuncionario" name="idFuncionario" value={formData.idFuncionario} onChange={handleChange} required />
+                    <label htmlFor="idViagem">ID da Viagem:</label>
+                    <input type="text" id="idViagem" name="idViagem" value={formData.idViagem} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="dataViagem">Data da Viagem:</label>
-                    <input type="date" id="dataViagem" name="dataViagem" value={formData.dataViagem} onChange={handleChange} required />
+                    <label htmlFor="dataDeIda">Data da Viagem:</label>
+                    <input type="date" id="dataDeIda" name="dataDeIda" value={formData.dataDeIda} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="dataVoltaViagem">Data de Volta da Viagem:</label>
-                    <input type="date" id="dataVoltaViagem" name="dataVoltaViagem" value={formData.dataVoltaViagem} onChange={handleChange} required />
+                    <label htmlFor="dataDeVolta">Data de Volta da Viagem:</label>
+                    <input type="date" id="dataDeVolta" name="dataDeVolta" value={formData.dataDeVolta} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="cidade">Cidade:</label>
@@ -70,6 +76,14 @@ const CadastraViagem = () => {
                 <div className="form-group">
                     <label htmlFor="descricao">Descrição da Viagem:</label>
                     <textarea id="descricao" name="descricao" value={formData.descricao} onChange={handleChange} rows="4" required></textarea>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="emailUsuario">Email do Usuário:</label>
+                    <input type="email" id="emailUsuario" name="emailUsuario" value={formData.emailUsuario} onChange={handleChange} required />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="emailAdmin">Email do Admin:</label>
+                    <input type="email" id="emailAdmin" name="emailAdmin" value={formData.emailAdmin} onChange={handleChange} required />
                 </div>
                 <button type="submit">Cadastrar Viagem</button>
             </form>

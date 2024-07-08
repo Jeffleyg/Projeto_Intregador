@@ -1,23 +1,25 @@
-/* eslint-disable no-undef */
+// Em authenticateJWT.js
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'Jeffley2024';
 
 const authenticateJWT = (req, res, next) => {
-  const tokenHeader = req.headers['authorization']
+  const tokenHeader = req.headers['authorization'];
   const token = tokenHeader && tokenHeader.split(" ")[1];
 
-  if(!token){
-    return res.status(401).json({message: "Nao autorizado !"})
+  if (!token) {
+    return res.status(401).json({ message: "Não autorizado!" });
   }
 
-  try{
-    const user = jwt.verify(token, SECRET_KEY);
-    req.user = user
-      next();
-  }catch (error) {
-    console.error(error);
-    res.status(500).json({ erro: 'Erro ao verificar credenciais' });
-  }
-}
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err) {
+      if (err.name === 'TokenExpiredError') {
+        return res.status(401).json({ message: 'Token expirado!' });
+      }
+      return res.status(403).json({ message: 'Token inválido!' });
+    }
+    req.user = user;
+    next();
+  });
+};
 
 module.exports = authenticateJWT;

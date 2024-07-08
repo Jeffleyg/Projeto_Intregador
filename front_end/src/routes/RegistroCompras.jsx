@@ -7,13 +7,13 @@ import '../registro_compras.css';
 const RegistroCompras = () => {
   const [items, setItems] = useState([]);
   const [formData, setFormData] = useState({
-    tripCode: '',
-    employeeId: '',
-    purchaseDate: '',
-    location: '',
-    expenseType: '',
-    receipt: null,
-    description: ''
+    codigoViagem: '',
+    email: '',
+    dataCompra: '',
+    local: '',
+    tipoDespesa: '',
+    valor: null,
+    descricao: ''
   });
 
   const addItem = () => {
@@ -37,7 +37,7 @@ const RegistroCompras = () => {
   const handleFileChange = (event) => {
     setFormData(prevState => ({
       ...prevState,
-      receipt: event.target.files[0]
+      valor: event.target.files[0]
     }));
   };
 
@@ -46,13 +46,13 @@ const RegistroCompras = () => {
 
     // Preparar os dados para envio
     const data = new FormData();
-    data.append('tripCode', formData.tripCode);
-    data.append('employeeId', formData.employeeId);
-    data.append('purchaseDate', formData.purchaseDate);
-    data.append('location', formData.location);
-    data.append('expenseType', formData.expenseType);
-    data.append('receipt', formData.receipt);
-    data.append('description', formData.description);
+    data.append('codigoViagem', formData.codigoViagem);
+    data.append('email', formData.email);
+    data.append('dataCompra', formData.dataCompra);
+    data.append('local', formData.local);
+    data.append('tipoDespesa', formData.tipoDespesa);
+    data.append('valor', formData.valor);
+    data.append('descricao', formData.descricao);
 
     // Adiciona itens ao FormData
     items.forEach((item, index) => {
@@ -69,13 +69,14 @@ const RegistroCompras = () => {
       alert('Compra registrada com sucesso!');
       // Limpar o formulário após o envio
       setFormData({
-        tripCode: '',
-        employeeId: '',
-        purchaseDate: '',
-        location: '',
-        expenseType: '',
-        receipt: null,
-        description: ''
+        codigoViagem: '',
+        email: '',
+        dataCompra: '',
+        local: '',
+        tipoDespesa: '',
+        valor: null,
+        descricao: '',
+        notaFiscal: null
       });
       setItems([]);
     } catch (error) {
@@ -103,50 +104,50 @@ const RegistroCompras = () => {
       </header>
       <h1>Registro de Compras de Viagem</h1>
       <form id="purchase-form" onSubmit={handleSubmit}>
-        <label htmlFor="tripCode">Código da Viagem:</label>
+        <label htmlFor="codigoViagem">Código da Viagem:</label>
         <input
           type="text"
-          id="tripCode"
-          name="tripCode"
-          value={formData.tripCode}
+          id="codigoViagem"
+          name="codigoViagem"
+          value={formData.codigoViagem}
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="employeeId">ID do Funcionário:</label>
+        <label htmlFor="email">email do Funcionário:</label>
         <input
           type="text"
-          id="employeeId"
-          name="employeeId"
-          value={formData.employeeId}
+          id="email"
+          name="email"
+          value={formData.email}
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="purchaseDate">Data da Compra:</label>
+        <label htmlFor="dataCompra">Data da Compra:</label>
         <input
           type="date"
-          id="purchaseDate"
-          name="purchaseDate"
-          value={formData.purchaseDate}
+          id="dataCompra"
+          name="dataCompra"
+          value={formData.dataCompra}
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="location">Local (automático):</label>
+        <label htmlFor="local">Local (automático):</label>
         <input
           type="text"
-          id="location"
-          name="location"
-          value={formData.location}
+          id="local"
+          name="local"
+          value={formData.local}
           readOnly
         />
 
-        <label htmlFor="expenseType">Tipo de Despesa:</label>
+        <label htmlFor="tipoDespesa">Tipo de Despesa:</label>
         <select
-          id="expenseType"
-          name="expenseType"
-          value={formData.expenseType}
+          id="tipoDespesa"
+          name="tipoDespesa"
+          value={formData.tipoDespesa}
           onChange={handleChange}
           required
         >
@@ -179,21 +180,21 @@ const RegistroCompras = () => {
           ))}
         </div>
 
-        <label htmlFor="receipt">Recibo (PDF ou PNG):</label>
+        <label htmlFor="valor">Recibo (PDF ou PNG):</label>
         <input
           type="file"
-          id="receipt"
-          name="receipt"
+          id="valor"
+          name="valor"
           accept="image/png, application/pdf"
           onChange={handleFileChange}
           required
         />
 
-        <label htmlFor="description">Descrição:</label>
+        <label htmlFor="descricao">Descrição:</label>
         <textarea
-          id="description"
-          name="description"
-          value={formData.description}
+          id="descricao"
+          name="descricao"
+          value={formData.descricao}
           onChange={handleChange}
           required
         ></textarea>

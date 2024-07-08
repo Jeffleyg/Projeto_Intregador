@@ -6,10 +6,6 @@ const DespesasViagem = sequelize.define('despesasviagem', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    idFuncionario: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     dataNota: {
         type: DataTypes.DATE,
         allowNull: false

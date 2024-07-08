@@ -1,16 +1,40 @@
 const registroComprasService = require('../service/comprasService');
 const purchasesModel = require('../models/registroCompras');
 
-const registerCompra = async (req, res, next) => {
+const registerCompra = async (req, res) => {
     try {
-        const { idFuncionario } = req.user; // Supondo que o idFuncionario está disponível em req.user
-        const purchaseData = { ...req.body, idFuncionario};
-        const purchase = await registroComprasService.registerCompra(purchaseData);
-        res.status(201).json({ purchase });
+        const { emailUsuario, codigoViagem, dataNota, cidadeNota, tipoDespesa, valor, descricao, notaFiscal } = req.body;
+
+        // // Verificar se req.user está definido
+        // if (!req.user || !req.user.email) {
+        //     return res.status(400).json({ error: 'Usuário não autenticado' });
+        // }
+
+        // Verificar se um arquivo foi enviado
+        // if (!req.file) {
+        //     return res.status(400).json({ error: 'Arquivo de recibo é obrigatório' });
+        // }
+
+        const compraData = {
+            codigoViagem,
+            dataNota,
+            cidadeNota,
+            tipoDespesa,
+            valor,
+            descricao,
+            notaFiscal,
+           // reciboPdf: req.file.path, // Caminho do arquivo enviado
+            emailUsuario: req.user.email
+        };
+
+        const despesaRegistrada = await registroComprasService.registerCompra(compraData);
+
+        res.status(201).json({ message: 'Despesa cadastrada com sucesso', despesa: despesaRegistrada });
     } catch (error) {
-        next(error);
+        console.error('Erro ao cadastrar despesa:', error.message);
+        res.status(500).json({ error: 'Erro interno ao cadastrar despesa' });
     }
-}
+};
 
 const listCompras = async (req, res, next) => {
     try {

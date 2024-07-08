@@ -3,10 +3,6 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database');
 
 const RegistroCompras = sequelize.define('registroCompras', {   
-    idFuncionario: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     codigoViagem: {
         type: DataTypes.STRING,
         allowNull: false
@@ -35,10 +31,13 @@ const RegistroCompras = sequelize.define('registroCompras', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    itensComprados: {
-        type: DataTypes.JSON,
-        allowNull: false
-    }
+    // reciboPdf: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
+    //     validate: {
+    //         is: /\.(pdf|png|jpg|jpeg)$/i // Validação para aceitar apenas PDF, PNG, JPG e JPEG
+    //     }
+    // },
 }, {
     tableName: 'registrocompras',
     timestamps: false

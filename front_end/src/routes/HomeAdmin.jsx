@@ -70,11 +70,7 @@ function HomeAdmin() {
                 <li><Link to="/cadastrarDespesasAdmin">Cadastrar Despesas da Viagem</Link></li>
                 <li><Link to="/registroComprasAdmin">Registrar Compras da Viagem</Link></li>
                 <li><Link to="/manterCadastroAdmin">Manter Cadastro de Produtos</Link></li>
-                <li><Link to="/listaViagemAdmin">Lista de viagem</Link></li>
-                <li><Link to="/listaDespesaAdmin">Lista de despesa</Link></li>
-                <li><Link to="/listaCompraAdmin">Lista de compra</Link></li>
-                <li><Link to="/listaProdutoAdmin">Lista de produto</Link></li>
-                <li><Link to="/listaFuncionarioAdmin">Lista de funcionario</Link></li>
+                <li><Link to="/listaFuncionario">Lista de funcionario</Link></li>
               </ul>
             </li>
             <li>
