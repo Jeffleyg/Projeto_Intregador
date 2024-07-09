@@ -22,13 +22,13 @@ const ForgotPassword = () => {
     return (
         <div className="login-card-container">
             <div className="login-card">
-                <h1>Reset Your Password</h1>
+                <h1>Redefinir sua senha</h1>
                 <form id="forgotPasswordForm" onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Enter Email" required />
-                    <button type="submit">Submit</button>
+                    <input type="text" placeholder="Entra Email" required />
+                    <button type="submit">Enviar</button>
                 </form>
                 <div className="login-card-footer">
-                    Remembered your password? <a href="/login">Sign in here.</a>
+                    Relembrou sua senha? <a href="/">Clique aqui.</a>
                 </div>
             </div>
         </div>
