@@ -1,18 +1,21 @@
 import React from 'react';
+import rest from './api'; // Ajuste o caminho para o local correto do seu arquivo `rest`
 import '../style_password.css';
 
 const ForgotPassword = () => {
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const email = document.querySelector('input[type="text"]').value;
-        const cnpj = document.querySelectorAll('input[type="text"]')[1].value;
 
-        // Verificação simples hardcoded
-        if (email === "jeffley@example.com" && cnpj === "12.345.678/0001-12") {
-            window.location.href = 'homeAdmin'; // Redireciona para a página de resetar senha
-        } else {
-            alert('Invalid email or CNPJ!');
+        try {
+            const response = await rest.post('/forgotPassword', { email });
+            alert(response.data.message);
+            // Redireciona para a página de resetar senha, se necessário
+            // window.location.href = 'homeAdmin';
+        } catch (error) {
+            console.error('Erro ao enviar email de recuperação de senha:', error);
+            alert('Erro ao enviar email de recuperação de senha. Tente novamente mais tarde.');
         }
     };
 
@@ -22,7 +25,6 @@ const ForgotPassword = () => {
                 <h1>Reset Your Password</h1>
                 <form id="forgotPasswordForm" onSubmit={handleSubmit}>
                     <input type="text" placeholder="Enter Email" required />
-                    <input type="text" placeholder="Enter Employee ID" required />
                     <button type="submit">Submit</button>
                 </form>
                 <div className="login-card-footer">

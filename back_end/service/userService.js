@@ -5,6 +5,7 @@ const CadastroAdmin = require('../models/cadastrarAdmin');
 const CadastrarViagem = require('../models/cadastrarViagemModel');
 const DespesasViagem = require('../models/despesasViagem');
 const transporter = require('../utils/mailer');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'Jeffley2024';
 
@@ -116,22 +117,40 @@ const loginAdmin = async ({ email, password }) => {
     return user;
 };
 
+const generateRandomPassword = () => {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let password = '';
+    for (let i = 0; i < 10; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return password;
+};
+
 
 const forgotPassword = async (email) => {
-    const user = await Cadastro.findOne({ email });
+    const user = await Cadastro.findOne({ where: { email } });
     if (!user) {
         throw new Error('Email não cadastrado');
     }
 
+    // Gerar nova senha aleatória
+    const newPassword = generateRandomPassword();
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Atualizar a senha do usuário no banco de dados
+    await user.update({ password: hashedPassword });
+
     // Lógica para enviar email de recuperação de senha
     const mailOptions = {
-        from: 'jeffley.garcon@estudante.uffs.edu.br',
+        from: 'jeffleygarcon007@gmail.com',
         to: email,
         subject: 'Recuperação de senha',
-        text: 'Recuperação de senha'
+        text: `Sua nova senha é: ${newPassword}`
     };
 
+    await transporter.sendMail(mailOptions);
 
+    return 'Email de recuperação de senha enviado com sucesso';
 };
 
 const resetPassword = async ({ email, password, confirmPassword }) => {
