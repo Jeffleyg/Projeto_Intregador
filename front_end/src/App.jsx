@@ -54,7 +54,7 @@ function App() {
         <Route path="/ajuda" element={<Ajuda />} />
         <Route path="/registroCompras" element={<RegistroCompras />} />
         <Route path="/historicoCompras" element={<HistoricoCompras />} />
-        <Route path="/historicoDespesas" element={<HistoricoDespesas />} />
+        <Route path="/historicoDespesas" element={<HistoricoDespesas userEmail={userEmail} />} />
         <Route path="/historicoViagens" element={<HistoricoViagens userEmail={userEmail} />} />
         <Route path="/manterCadastro" element={<ManterCadastroCompras />} />
         <Route path="/cadastrarViagem" element={<CadastraViagem />} />

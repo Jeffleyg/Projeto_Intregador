@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #0056b3;
+    background-color: #333;
     color: white;
     padding: 20px 40px;
     display: flex;
@@ -35,7 +35,7 @@ nav ul li a {
 }
 
 nav ul li a.active, nav ul li a:hover {
-    background-color: #003580;
+    background-color: #333;
 }
 
 main {
@@ -51,7 +51,7 @@ section {
 }
 
 h2 {
-    color: #0056b3;
+    color: #333;
 }
 
 .settings-option {
@@ -79,7 +79,7 @@ h2 {
 button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #0056b3;
+    background-color: #333;
     color: white;
     border: none;
     border-radius: 5px;
@@ -88,7 +88,7 @@ button {
 }
 
 button:hover {
-    background-color: #003580;
+    background-color: #333;
 }
 
 footer {

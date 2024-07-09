@@ -14,8 +14,8 @@ const ViagemContainer = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>email Funcionario</th>
+                            <th>Id viagem</th>
+                            <th>Email Funcionario</th>
                             <th>Data de Ida</th>
                             <th>Data de Volta</th>
                             <th>Cidade</th>
@@ -26,7 +26,8 @@ const ViagemContainer = () => {
                     <tbody>
                         {viagens.length > 0 ? (
                             viagens.map((viagem) => (
-                                <tr key={viagem.idViagem}>
+                                <tr key={viagem.id}>
+                                    <td>{viagem.idViagem}</td>
                                     <td>{viagem.email}</td>
                                     <td>{new Date(viagem.dataDeIda).toLocaleDateString()}</td>
                                     <td>{new Date(viagem.dataDeVolta).toLocaleDateString()}</td>

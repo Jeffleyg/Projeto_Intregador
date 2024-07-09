@@ -3,6 +3,7 @@
 const Cadastro = require('../models/cadastrarModel');
 const CadastroAdmin = require('../models/cadastrarAdmin');
 const CadastrarViagem = require('../models/cadastrarViagemModel');
+const DespesasViagem = require('../models/despesasViagem');
 const transporter = require('../utils/mailer');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'Jeffley2024';
@@ -93,17 +94,18 @@ const search = async (email) => {
 };
 
 
-
 const loginUsuario = async ({ email, password }) => {
     const user = await Cadastro.findOne({where:{ email, password }});
 
     const viagem = await CadastrarViagem.findOne({where : {email: email}});
 
+    const despesas = await DespesasViagem.findAll({where : {emailFuncionario: email}});
+
 
     if (!user) {
         throw new Error('Usuário não encontrado');
     }
-    return {user, viagem};
+    return {user, viagem, despesas};
 };
 
 const loginAdmin = async ({ email, password }) => {

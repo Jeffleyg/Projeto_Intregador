@@ -10,7 +10,7 @@ const DespesasViagem = sequelize.define('despesasviagem', {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
-            model: 'cadastros',
+            model: 'cadastrarviagem',
             key: 'email'
         }
     },

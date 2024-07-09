@@ -72,7 +72,7 @@ const CadastrarDespesasAdmin = () => {
           <input type="checkbox" id="menu-toggle" />
           <label htmlFor="menu-toggle" className="menu-icon">&#9776;</label>
           <ul className="menu-items">
-            <li><a href="#">Visualização Histórico Despesas</a></li>
+            <li><a href="/historicoDespesas">Visualização Histórico Despesas</a></li>
             <li><a href="/homeAdmin">Home</a></li>
             <li><a href="/ajudaAdmin">Ajuda</a></li>
           </ul>

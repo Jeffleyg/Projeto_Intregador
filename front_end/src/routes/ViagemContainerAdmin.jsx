@@ -3,7 +3,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import '../viagemList.css';
 
-const ViagemContainer = () => {
+const ViagemContainerAdmin = () => {
     const location = useLocation();
     const { viagens } = location.state || { viagens: [] }; // Recebe dados da navegação
 
@@ -48,4 +48,4 @@ const ViagemContainer = () => {
     );
 };
 
-export default ViagemContainer;
+export default ViagemContainerAdmin;

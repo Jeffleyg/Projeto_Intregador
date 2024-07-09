@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import rest from './api';
 import '../historico_de_despesas.css';
 
-const HistoricoDespesas = () => {
+const HistoricoDespesas = ({ userEmail }) => { // Recebe o email do funcionário como prop
   const [expenseHistory, setExpenseHistory] = useState([]);
 
   useEffect(() => {
     const fetchExpenseHistory = async () => {
       try {
-        const response = await rest.get('/listAllDespesas');
+        const response = await rest.get(`/listAllDespesasByUser/${userEmail}`);
         setExpenseHistory(response.data.despesas); // Certifique-se de que 'despesas' é o campo que a API retorna
       } catch (error) {
         console.error('Erro ao buscar histórico de despesas:', error);
@@ -17,7 +17,7 @@ const HistoricoDespesas = () => {
     };
 
     fetchExpenseHistory();
-  }, []);
+  }, [userEmail]); // Adiciona userEmail como dependência
 
   const handleRemove = async (id) => {
     try {

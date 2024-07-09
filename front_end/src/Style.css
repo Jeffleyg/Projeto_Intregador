@@ -2,13 +2,13 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f0f2f5;
-    color: #333;
+    background: #f0e6da;
+    color: #4e342e;
 }
 
 header {
-    background-color: #0056b3;
-    color: white;
+    background-color: #3e2723;
+    color: #d7ccc8;
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
@@ -27,7 +27,7 @@ nav ul {
 }
 
 nav ul li a {
-    color: white;
+    color: #8d6e63;
     text-decoration: none;
     padding: 5px 10px;
     border-radius: 5px;
@@ -35,7 +35,8 @@ nav ul li a {
 }
 
 nav ul li a.active, nav ul li a:hover {
-    background-color: #003580;
+    background-color: #3e2723;
+    color: #fff;
 }
 
 main {
@@ -43,7 +44,7 @@ main {
 }
 
 section {
-    background-color: white;
+    background-color: #ffffff;
     padding: 20px;
     margin-top: 20px;
     border-radius: 5px;
@@ -51,7 +52,7 @@ section {
 }
 
 h2 {
-    color: #0056b3;
+    color: #3e2723;
 }
 
 .info, .settings {
@@ -70,7 +71,7 @@ input[type="tel"],
 input[type="password"] {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #8d6e63;
     border-radius: 4px;
 }
 
@@ -81,7 +82,7 @@ input[type="checkbox"] {
 button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #0056b3;
+    background-color: #3e2723;
     color: white;
     border: none;
     border-radius: 5px;
@@ -90,14 +91,14 @@ button {
 }
 
 button:hover {
-    background-color: #003580;
+    background-color: #5d4037;
 }
 
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: #f0f2f5;
-    border-top: 1px solid #ccc;
+    background-color: #f0e6da;
+    border-top: 1px solid #8d6e63;
     position: fixed;
     width: 100%;
     bottom: 0;

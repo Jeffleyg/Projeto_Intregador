@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import $ from 'jquery';
 import rest from './api'; // Ajuste o caminho conforme necessário
 import '../cadastrar_de_despesas.css';
 
@@ -12,48 +11,22 @@ const CadastrarDespesas = () => {
     tipoDespesa: '',
     valor: '',
     descricao: '',
-    notaFiscal: null,
-    tipoHospedagem: '',
-    especificarOutroHospedagem: '',
-    preferenciaEstadia: '',
-    especificarOutroEstadia: '',
-    meioTransporte: '',
-    especificarOutroTransporte: '',
-    cafeManha: false,
-    almoco: false,
-    jantar: false,
-    lanches: false,
-    todos: false
+    notaFiscal: null
   });
 
   const handleTipoDespesaChange = (event) => {
     const tipo = event.target.value;
-    setFormData((prevState) => ({
+    setFormData(prevState => ({
       ...prevState,
       tipoDespesa: tipo
     }));
-    $('.opcoes').hide();
-    $(`#opcoes_${tipo}`).show();
-  };
-
-  const handleMeioTransporteChange = (event) => {
-    const meio = event.target.value;
-    setFormData((prevState) => ({
-      ...prevState,
-      meioTransporte: meio
-    }));
-    if (meio === 'outro') {
-      $('#especificar_outro_transporte').show();
-    } else {
-      $('#especificar_outro_transporte').hide();
-    }
   };
 
   const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
+    const { name, value, type, files } = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: type === 'checkbox' ? checked : type === 'file' ? files[0] : value
+      [name]: type === 'file' ? files[0] : value
     }));
   };
 
@@ -81,18 +54,7 @@ const CadastrarDespesas = () => {
         tipoDespesa: '',
         valor: '',
         descricao: '',
-        notaFiscal: null,
-        tipoHospedagem: '',
-        especificarOutroHospedagem: '',
-        preferenciaEstadia: '',
-        especificarOutroEstadia: '',
-        meioTransporte: '',
-        especificarOutroTransporte: '',
-        cafeManha: false,
-        almoco: false,
-        jantar: false,
-        lanches: false,
-        todos: false
+        notaFiscal: null
       });
     } catch (error) {
       console.error('Erro ao cadastrar despesa:', error);
@@ -110,9 +72,9 @@ const CadastrarDespesas = () => {
           <input type="checkbox" id="menu-toggle" />
           <label htmlFor="menu-toggle" className="menu-icon">&#9776;</label>
           <ul className="menu-items">
-            <li><a href="#">visualizacao_historico_despesas</a></li>
-            <li><a href="/homeAdmin">Home</a></li>
-            <li><a href="/ajudaAdmin">Ajuda</a></li>
+            <li><a href="/historicoDespesas"> Histórico Despesas</a></li>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/ajuda">Ajuda</a></li>
           </ul>
         </div>
       </header>
@@ -133,10 +95,11 @@ const CadastrarDespesas = () => {
 
           <label htmlFor="tipo_despesa">Tipo de despesa:</label>
           <select id="tipo_despesa" name="tipoDespesa" value={formData.tipoDespesa} onChange={handleTipoDespesaChange} required>
-            <option value="">Selecione...</option>
-            <option value="alimentacao">Alimentação</option>
+            <option value="">Selecione</option>
             <option value="transporte">Transporte</option>
+            <option value="alimentacao">Alimentação</option>
             <option value="hospedagem">Hospedagem</option>
+            {/* Adicione mais opções conforme necessário */}
           </select><br />
 
           <label htmlFor="valor_pago">Valor pago:</label>
@@ -145,60 +108,8 @@ const CadastrarDespesas = () => {
           <label htmlFor="descricao">Descrição:</label>
           <textarea id="descricao" name="descricao" value={formData.descricao} onChange={handleChange} required></textarea><br />
 
-          <label htmlFor="nota_fiscal">Nota fiscal/recibo (PDF/PNG):</label>
-          <input type="file" id="nota_fiscal" name="notaFiscal" onChange={handleChange} accept=".pdf,.png" required /><br />
-
-          <div id="opcoes_alimentacao" className="opcoes" style={{ display: formData.tipoDespesa === 'alimentacao' ? 'block' : 'none' }}>
-            <h3>Indique suas preferências quanto às refeições durante a viagem:</h3>
-            <input type="checkbox" id="cafe_manha" name="cafeManha" checked={formData.cafeManha} onChange={handleChange} />
-            <label htmlFor="cafe_manha">Café da Manhã</label><br />
-
-            <input type="checkbox" id="almoco" name="almoco" checked={formData.almoco} onChange={handleChange} />
-            <label htmlFor="almoco">Almoço</label><br />
-
-            <input type="checkbox" id="jantar" name="jantar" checked={formData.jantar} onChange={handleChange} />
-            <label htmlFor="jantar">Jantar</label><br />
-
-            <input type="checkbox" id="lanches" name="lanches" checked={formData.lanches} onChange={handleChange} />
-            <label htmlFor="lanches">Lanches</label><br />
-
-            <input type="checkbox" id="todos" name="todos" checked={formData.todos} onChange={handleChange} />
-            <label htmlFor="todos">Todos</label><br />
-          </div>
-
-          <div id="opcoes_hospedagem" className="opcoes" style={{ display: formData.tipoDespesa === 'hospedagem' ? 'block' : 'none' }}>
-            <h3>Por favor, selecione o tipo de hospedagem que você prefere durante a viagem:</h3>
-            <input type="radio" id="hotel" name="tipoHospedagem" value="hotel" checked={formData.tipoHospedagem === 'hotel'} onChange={handleChange} />
-            <label htmlFor="hotel">Hotel</label><br />
-
-            <input type="radio" id="pousada" name="tipoHospedagem" value="pousada" checked={formData.tipoHospedagem === 'pousada'} onChange={handleChange} />
-            <label htmlFor="pousada">Pousada</label><br />
-
-            <input type="radio" id="hostel" name="tipoHospedagem" value="hostel" checked={formData.tipoHospedagem === 'hostel'} onChange={handleChange} />
-            <label htmlFor="hostel">Hostel</label><br />
-
-            <input type="radio" id="outro" name="tipoHospedagem" value="outro" checked={formData.tipoHospedagem === 'outro'} onChange={handleChange} />
-            <label htmlFor="outro">Outro</label><br />
-
-            <input type="text" id="especificar_outro_hospedagem" name="especificarOutroHospedagem" placeholder="Especificar outro tipo" style={{ display: formData.tipoHospedagem === 'outro' ? 'block' : 'none' }} value={formData.especificarOutroHospedagem} onChange={handleChange} /><br />
-          </div>
-
-          <div id="opcoes_transporte" className="opcoes" style={{ display: formData.tipoDespesa === 'transporte' ? 'block' : 'none' }}>
-            <h3>Por favor, selecione o meio de transporte utilizado:</h3>
-            <input type="radio" id="onibus" name="meioTransporte" value="onibus" checked={formData.meioTransporte === 'onibus'} onChange={handleMeioTransporteChange} />
-            <label htmlFor="onibus">Ônibus</label><br />
-
-            <input type="radio" id="trem" name="meioTransporte" value="trem" checked={formData.meioTransporte === 'trem'} onChange={handleMeioTransporteChange} />
-            <label htmlFor="trem">Trem</label><br />
-
-            <input type="radio" id="aviao" name="meioTransporte" value="aviao" checked={formData.meioTransporte === 'aviao'} onChange={handleMeioTransporteChange} />
-            <label htmlFor="aviao">Avião</label><br />
-
-            <input type="radio" id="outro" name="meioTransporte" value="outro" checked={formData.meioTransporte === 'outro'} onChange={handleMeioTransporteChange} />
-            <label htmlFor="outro">Outro</label><br />
-
-            <input type="text" id="especificar_outro_transporte" name="especificarOutroTransporte" placeholder="Especificar outro meio de transporte" style={{ display: formData.meioTransporte === 'outro' ? 'block' : 'none' }} value={formData.especificarOutroTransporte} onChange={handleChange} /><br />
-          </div>
+          <label htmlFor="nota_fiscal">Nota Fiscal:</label>
+          <input type="file" id="nota_fiscal" name="notaFiscal" onChange={handleChange} required /><br />
 
           <button type="submit">Cadastrar Despesa</button>
         </form>
