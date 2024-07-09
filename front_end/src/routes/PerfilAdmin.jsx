@@ -67,7 +67,7 @@ function PerfilAdmin() {
           <nav>
             <ul>
               <li><Link to="/homeAdmin">Dashboard</Link></li>
-              <li><Link to="/ajudaAdmi">Ajuda</Link></li>
+              <li><Link to="/ajudaAdmin">Ajuda</Link></li>
               <li><Link to="/configuracoesAdmin">Configurações</Link></li>
               <li><Link to="/perfilAdmin" className="active">Perfil</Link></li>
             </ul>

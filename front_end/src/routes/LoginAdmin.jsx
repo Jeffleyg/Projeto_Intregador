@@ -30,7 +30,7 @@ function LoginAdmin({ onLoginSuccess }) {
           const authToken = response.data.token;
           navigate('/HomeAdmin', { state: { token: authToken } });
       } else {
-          alert('Credenciais inválidas');
+          alert('Usuário ou senha inválidos!');
       }
   } catch (error) {
       console.error('Erro ao fazer login:', error);
@@ -50,27 +50,27 @@ function LoginAdmin({ onLoginSuccess }) {
           <img src="logoFelishop.jpg" alt="logo" />
         </div>
         <div className="login-card-header">
-          <h1>Sign In</h1>
-          <div>Please login to use the platform</div>
+          <h1>Fazer Login</h1>
+          <div>Por favor, faça login para usar a plataforma</div>
         </div>
         <form className="login-card-form" id="loginForm" onSubmit={handleSubmit}>
           <div className="form-item">
-            <span className="form-item-icon material-symbols-rounded">mail</span>
-            <input type="text" placeholder="Enter Email" id="emailForm" autoFocus required />
+            <span className="form-item-icon material-symbols-rounded">Email</span>
+            <input type="text" placeholder="Entra Email" id="emailForm" autoFocus required />
           </div>
           <div className="form-item">
-            <span className="form-item-icon material-symbols-rounded">lock</span>
-            <input type="password" placeholder="Enter Password" id="passwordForm" required />
+            <span className="form-item-icon material-symbols-rounded">Senha</span>
+            <input type="password" placeholder="Entra Senha" id="passwordForm" required />
           </div>
           <div className="form-item-other">
             <div className="checkbox">
               <input type="checkbox" id="rememberMeCheckbox" defaultChecked />
-              <label htmlFor="rememberMeCheckbox">Remember me</label>
+              <label htmlFor="rememberMeCheckbox">Lembra me</label>
             </div>
-            <a href="/forgotPassword">I forgot my password!</a>
+            <a href="/forgotPassword">Esquecei a minha senha!</a>
           </div>
           <button type="submit" disabled={loading}>
-            {loading ? 'Signing In...' : 'Sign In'}
+            {loading ? 'Signing In...' : 'Entrar'}
           </button>
         </form>
         <div className="login-card-footer">
@@ -78,7 +78,7 @@ function LoginAdmin({ onLoginSuccess }) {
         </div>
       </div>
       <div className="login-card-social">
-        <div>Other Sign-In Options</div>
+        <div>Outra opçaõ de login</div>
         <div className="login-card-social-btns">
           <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-brand-facebook"

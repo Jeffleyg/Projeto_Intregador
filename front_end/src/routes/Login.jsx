@@ -27,7 +27,7 @@ function Login({ onLoginSuccess }) {
         onLoginSuccess(email); // Passa o email do usuário logado
         navigate('/home', { state: { token: authToken } }); // Navega para a página principal
       } else {
-        alert('Invalid username or password!');
+        alert('Usuário ou senha inválidos!');
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -49,15 +49,15 @@ function Login({ onLoginSuccess }) {
           <img src="logoFelishop.jpg" alt="logo" />
         </div>
         <div className="login-card-header">
-          <h1>Sign In</h1>
-          <div>Please login to use the platform</div>
+          <h1>Fazer Login</h1>
+          <div>Por favor, faça login para usar a plataforma</div>
         </div>
         <form className="login-card-form" id="loginForm" onSubmit={handleSubmit}>
           <div className="form-item">
-            <span className="form-item-icon material-symbols-rounded">mail</span>
+            <span className="form-item-icon material-symbols-rounded">Email</span>
             <input
               type="text"
-              placeholder="Enter Email"
+              placeholder="Entra Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoFocus
@@ -65,33 +65,33 @@ function Login({ onLoginSuccess }) {
             />
           </div>
           <div className="form-item">
-            <span className="form-item-icon material-symbols-rounded">lock</span>
+            <span className="form-item-icon material-symbols-rounded">Senha</span>
             <input
               type="password"
-              placeholder="Enter Password"
+              placeholder="Entra Senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </div>
+          </div> 
           <div className="form-item-other">
             <div className="checkbox">
               <input type="checkbox" id="rememberMeCheckbox" defaultChecked />
-              <label htmlFor="rememberMeCheckbox">Remember me</label>
+              <label htmlFor="rememberMeCheckbox">Lembra me</label>
             </div>
-            <a href="/forgotPassword">I forgot my password!</a>
+            <a href="/forgotPassword">Esquecei a minha senha!</a>
           </div>
           <button type="submit" disabled={loading}>
-            {loading ? 'Signing In...' : 'Sign In'}
+            {loading ? 'Conectando...' : 'Entrar'}
           </button>
           {error && <p className="error-message">{error}</p>}
         </form>
         <div className="login-card-footer">
           Você é administrador? <a href="/loginAdmin">Clique aqui!</a>
         </div>
-      </div>
+      </div> 
       <div className="login-card-social">
-        <div>Other Sign-In Options</div>
+        <div>Outra opçaõ de login</div>
         <div className="login-card-social-btns">
           <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-brand-facebook"

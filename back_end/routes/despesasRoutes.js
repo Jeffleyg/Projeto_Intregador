@@ -11,6 +11,6 @@ router.get('/listAllDespesas',authenticateJWT, despesasController.listAllDespesa
 router.put('/updateDespesa/:id', despesasController.updateDespesa);
 router.delete('/deleteDespesa/:id', despesasController.deleteDespesa);
 router.get('/getDespesaById', despesasController.getDespesaById);
-router.get('/listAllDespesasByUser', despesasController.listAllDespesasByUser);
+router.get('/listAllDespesasByUser/:emailFuncionario', despesasController.listAllDespesasByUser);
 
 module.exports = router;

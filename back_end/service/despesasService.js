@@ -25,18 +25,22 @@ const listAllDespesas = async () => {
     }
 };
 
-const listAllDespesasByUser = async (email) => {
-    try {
-        const despesas = await DespesasViagem.findByPk({ where: { email : email } });
-        return despesas;
-    } catch (error) {
-        throw new Error('Erro ao listar despesas no banco de dados');
+const listAllDespesasByUser = async (emailFuncionario) => {
+
+    
+    // Certifique-se de que o emailFuncionario não é undefined ou null
+    if (!emailFuncionario) {
+        throw new Error('O email do funcionário deve ser fornecido');
     }
+
+    // Busca todas as despesas relacionadas ao email do funcionário
+    const despesas = await DespesasViagem.findAll({ where: { emailFuncionario } });
+    return despesas;
 };
 
-const getByIdDespesa = async (email) => {
+const getByIdDespesa = async (emailFuncionario) => {
     try {
-        const despesa = await DespesasViagem.findByPk(email);
+        const despesa = await DespesasViagem.findAll({ where: {emailFuncionario: emailFuncionario} })
         return despesa;
     } catch (error) {
         throw new Error('Erro ao buscar despesa por ID no banco de dados');

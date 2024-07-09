@@ -33,7 +33,7 @@ const registerDespesa = async (req, res) => {
         // if (emailFuncionario !== req.user?.email) {
         //     return res.status(403).json({ error: 'Usuário não autorizado' });
         // }
-const notaFiscal = req.file ? req.file.filename : null; 
+        const notaFiscal = req.file ? req.file.filename : null; 
         const data = {
             idViagem,
             emailFuncionario,
@@ -88,7 +88,6 @@ const notaFiscal = req.file ? req.file.filename : null;
     }
 };
 
-
 const listAllDespesas = async (req, res, next) => {
     try {
         const despesas = await despesasService.listAllDespesas();
@@ -101,23 +100,20 @@ const listAllDespesas = async (req, res, next) => {
 
 const listAllDespesasByUser = async (req, res, next) => {
     try {
-        const email = req.user?.emailFuncionario; // Obtém o email do funcionário a partir do usuário autenticado
 
-        if (!email) {
-            return res.status(400).json({ error: 'email do funcionário não encontrado' });
-        }
-
-        const despesas = await despesasService.listAllDespesasByUser(email);
+        const despesas = await despesasService.listAllDespesasByUser(req.params.emailFuncionario);
         res.status(200).json({ despesas });
     } catch (error) {
         console.error('Erro ao listar despesas por usuário:', error);
         res.status(500).json({ error: 'Erro interno ao listar despesas por usuário' });
+        next(error);
     }
 };
+
 const getDespesaById = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const despesa = await despesasService.getByIdDespesa(id);
+        const { emailFuncionario } = req.params;
+        const despesa = await despesasService.getByIdDespesa(emailFuncionario);
         if (!despesa) {
             return res.status(404).json({ error: 'Despesa não encontrada' });
         }

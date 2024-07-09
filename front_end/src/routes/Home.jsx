@@ -60,15 +60,15 @@ function Home() {
         </div> 
         <nav className="nav-menu">
           <ul className="menu-items">
-            <li><Link to="/homeAdmin">Home</Link></li>
-            <li><Link to="/perfilAdmin">Perfil</Link></li>
+            <li><Link to="/home">Home</Link></li>
+            <li><Link to="/perfil">Perfil</Link></li>
             <li>
               <Link to="#">Cadastros</Link>
               <ul>
                 
-                <li><Link to="/cadastrarDespesasAdmin">Cadastrar Despesas da Viagem</Link></li>
-                <li><Link to="/registroComprasAdmin">Registrar Compras da Viagem</Link></li>
-                <li><Link to="/manterCadastroAdmin">Manter Cadastro de Produtos</Link></li>
+                <li><Link to="/cadastrarDespesas">Cadastrar Despesas da Viagem</Link></li>
+                <li><Link to="/registroCompras">Registrar Compras da Viagem</Link></li>
+                <li><Link to="/manterCadastro">Manter Cadastro de Produtos</Link></li>
                 
               </ul>
             </li>
